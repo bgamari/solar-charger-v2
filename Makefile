@@ -1,4 +1,4 @@
-name=myproject
+name=solar-charger-2
 
 %.sym : %.tsym
 	tragesym $< $@
