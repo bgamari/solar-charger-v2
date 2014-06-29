@@ -1,0 +1,9 @@
+Element["" "Panasonic-EEE-FK-size-C" "Name" "Val" 1000 1000 0nm -2000000nm 0 100 ""]
+(
+	Pad[-2925000nm 0nm -1075000nm 0nm 650000nm 0nm 650000nm "1" "1" "square"]
+	Pad[1075000nm 0nm 2925000nm 0nm 650000nm 0nm 650000nm "2" "2" "square"]
+	ElementLine [3402400nm 2750000nm -3402400nm 2750000nm 127000nm]
+	ElementLine [-3402400nm 2750000nm -3402400nm -2750000nm 127000nm]
+	ElementLine [-3402400nm -2750000nm 3402400nm -2750000nm 127000nm]
+	ElementLine [3402400nm -2750000nm 3402400nm 2750000nm 127000nm]
+)
