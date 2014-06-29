@@ -785,7 +785,7 @@ Symbol['~' 12.00mil]
 	SymbolLine[15.00mil 35.00mil 20.00mil 35.00mil 8.00mil]
 	SymbolLine[20.00mil 35.00mil 25.00mil 30.00mil 8.00mil]
 )
-Attribute("PCB::grid::unit" "mil")
+Attribute("PCB::grid::unit" "mm")
 Attribute("PCB::grid::size" "5.00mil")
 Via[2050.00mil 1450.00mil 60.00mil 20.00mil 0.0000 35.00mil "" ""]
 Via[2050.00mil 1500.00mil 60.00mil 20.00mil 0.0000 35.00mil "" ""]
@@ -1202,7 +1202,7 @@ Element["" "0603" "R13" "10k" 2365.00mil 1405.00mil -90.00mil -1.2380mm 0 77 ""]
 
 	)
 
-Element["" "0603" "C14" "0.1u" 2385.00mil 31.8650mm 1.7460mm -40.00mil 3 77 ""]
+Element["" "0603" "C14" "0.1u" 2385.00mil 31.8650mm -0.9010mm -2.4960mm 0 77 ""]
 (
 	Pad[-0.0500mm -0.7500mm 0.0500mm -0.7500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "square"]
 	Pad[-0.0500mm 0.7500mm 0.0500mm 0.7500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "square"]
@@ -1246,7 +1246,7 @@ Element["" "0603" "R7" "0.1" 2425.00mil 1655.00mil -40.00mil -1.7460mm 0 77 ""]
 
 	)
 
-Element["" "0603" "C4" "470n" 2850.00mil 1200.00mil -70.00mil -1.4920mm 0 77 ""]
+Element["" "0603" "C4" "470n" 2850.00mil 1200.00mil -25.00mil -2.5080mm 0 77 ""]
 (
 	Pad[-0.0500mm 0.7500mm 0.0500mm 0.7500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "square"]
 	Pad[-0.0500mm -0.7500mm 0.0500mm -0.7500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "square"]
@@ -1451,7 +1451,7 @@ Element["" "0603" "C5" "22n" 2825.00mil 1650.00mil -100.00mil -0.4760mm 0 77 ""]
 
 	)
 
-Element["" "1206" "C1" "100n" 2580.00mil 1295.00mil 98.50mil -31.50mil 0 77 ""]
+Element["" "1206" "C1" "100n" 2580.00mil 1295.00mil -131.50mil -36.50mil 0 77 ""]
 (
 	Pad[-59.05mil -11.81mil -59.05mil 11.81mil 51.18mil 20.00mil 57.18mil "1" "1" "square"]
 	Pad[59.05mil -11.81mil 59.05mil 11.81mil 51.18mil 20.00mil 57.18mil "2" "2" "square"]
@@ -1471,7 +1471,7 @@ Element["" "0603" "C7" "2.7n" 3020.00mil 1910.00mil 60.00mil -0.4760mm 0 77 ""]
 
 	)
 
-Element["" "0603" "R9" "unknown" 2685.00mil 1205.00mil 0.7740mm 0.0200mm 0 77 ""]
+Element["" "0603" "R9" "unknown" 2685.00mil 1205.00mil -0.4960mm -2.3930mm 0 77 ""]
 (
 	Pad[-0.0500mm -0.7500mm 0.0500mm -0.7500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "square"]
 	Pad[-0.0500mm 0.7500mm 0.0500mm 0.7500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "square"]
@@ -1482,7 +1482,7 @@ Element["" "0603" "R9" "unknown" 2685.00mil 1205.00mil 0.7740mm 0.0200mm 0 77 ""
 
 	)
 
-Element["" "Panasonic-EEE-FK-size-C" "C2" "22u" 2650.00mil 1475.00mil 0.8260mm -0.0320mm 0 100 ""]
+Element["" "Panasonic-EEE-FK-size-C" "C2" "22u" 2650.00mil 1475.00mil 1.8420mm -4.8580mm 0 100 ""]
 (
 	Pad[0.0000 -2.9250mm 0.0000 -1.0750mm 0.6500mm 0.0000 0.6500mm "1" "1" "square"]
 	Pad[0.0000 1.0750mm 0.0000 2.9250mm 0.6500mm 0.0000 0.6500mm "2" "2" "square,edge2"]
@@ -1515,7 +1515,7 @@ Element["" "0603" "R6" "2.2k" 3025.00mil 32.9050mm 0.7740mm -0.2340mm 0 77 ""]
 
 	)
 
-Element["" "0603" "R10" "unknown" 70.2190mm 1175.00mil 30.00mil 0.7940mm 0 76 ""]
+Element["" "0603" "R10" "unknown" 70.2190mm 1175.00mil -30.00mil 0.6670mm 0 76 ""]
 (
 	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "square"]
 	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "square"]
@@ -1526,7 +1526,7 @@ Element["" "0603" "R10" "unknown" 70.2190mm 1175.00mil 30.00mil 0.7940mm 0 76 ""
 
 	)
 
-Element["" "0603" "C3" "4.7n" 2970.00mil 1220.00mil 30.00mil -1.2380mm 0 77 ""]
+Element["" "0603" "C3" "4.7n" 2970.00mil 1220.00mil 30.00mil -1.3650mm 0 77 ""]
 (
 	Pad[-0.0500mm -0.7500mm 0.0500mm -0.7500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "square"]
 	Pad[-0.0500mm 0.7500mm 0.0500mm 0.7500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "square"]
