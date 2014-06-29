@@ -20,10 +20,10 @@ pinwidthhorizontal=400
 # if you have a device with slots, you'll have to use slot= and slotdef=
 # use comment= if there are special information you want to add
 version=20060113 1
-name=LMR12010X
-device=LMR12010X
+name=TPS54428
+device=TPS54428
 refdes=U?
-footprint=SOT23
+footprint=TI-DDA
 description=Buck converter
 author=Ben Gamari <bgamari@gmail.com>
 numslots=0
@@ -43,9 +43,19 @@ numslots=0
 #-----------------------------------------------------
 #pinnr	seq	type	style	posit.	net	label	
 #-----------------------------------------------------
-4		pwr	line	l		EN
-1		pwr	line	r		BOOST
-5		pwr	line	l		Vin
-6		pwr	line	r		SW
-3		pwr	line	r		FB
-2		pwr	line	b		GND
+2		in	line	l		SW
+3		pwr	line	l		BST
+4		pwr	line	l		ISEN
+5		pwr	line	l		SGND
+6		pwr	line	l		RTN
+9		pwr	line	l		FB
+10		pwr	line	l		SS
+11		pwr	line	l		RON/SD
+12		pwr	line	l		VCC
+13		pwr	line	l		VIN
+15		pwr	line	l		PAD
+1		pwr	none	l	GND	NC
+7		pwr	none	l	GND	NC
+8		pwr	none	l	GND	NC
+14		pwr	none	l	GND	NC
+

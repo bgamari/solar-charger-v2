@@ -20,10 +20,10 @@ pinwidthhorizontal=400
 # if you have a device with slots, you'll have to use slot= and slotdef=
 # use comment= if there are special information you want to add
 version=20060113 1
-name=TPS54426
-device=TPS54426
+name=TPS54428
+device=TPS54428
 refdes=U?
-footprint=TI-PWP
+footprint=TI-DDA
 description=Buck converter
 author=Ben Gamari <bgamari@gmail.com>
 numslots=0
@@ -43,18 +43,12 @@ numslots=0
 #-----------------------------------------------------
 #pinnr	seq	type	style	posit.	net	label	
 #-----------------------------------------------------
-14		pwr	line	l		Vcc
-13		pwr	line	l		Vin
-1		pwr	line	l		Vout
-2		pwr	line	l		Vfb
+1		in	line	l		EN
+2		pwr	line	l		VFB
+3		pwr	line	l		VREG5
 4		pwr	line	l		SS
-7		pwr	line	l		EN
-5		pwr	line	l		GND
-10		pwr	line	r		SW
-11		pwr	line	r		SW
-12		pwr	line	r		VBST
-6		pwr	line	r		PG
-3		pwr	line	r		VREG5
-8		pwr	line	r		PGND
-9		pwr	line	r		PGND
-15		pwr	line	b		PAD
+8		pwr	line	r		VIN
+7		pwr	line	r		VBST
+6		pwr	line	r		SW
+5		pwr	line	r		GND
+9		pwr	line	b		PAD
