@@ -1,0 +1,29 @@
+[options]
+wordswap	yes
+rotate_labels	no
+sort_labels	no
+generate_pinseq	yes
+sym_width	1600
+pinwidthvertical	300
+pinwidthhorizontal	300
+
+[geda_attr]
+version	20060113 1
+name	MIC5205
+device	MIC5205
+refdes	U?
+footprint	SOT23
+description	Linear regulator
+documentation	http://www.micrel.com/
+author	Ben Gamari <bgamari@gmail.com>
+numslots	0
+dist-license
+use-license
+
+[pins]
+#pinnr	seq	type	style	posit.	net	label
+1		pwr	line	l		Vin
+2		pwr	line	b		GND
+3		in	line	l		EN
+4		pwr	line	r		BYPASS
+5		pwr	line	r		Vout

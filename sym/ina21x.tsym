@@ -20,11 +20,11 @@ pinwidthhorizontal=400
 # if you have a device with slots, you'll have to use slot= and slotdef=
 # use comment= if there are special information you want to add
 version=20060113 1
-name=L79Lxx
-device=AD5L79Lxx
+name=INA21X
+device=INA21X
 refdes=U?
-footprint=SOT89
-description=Fixed negative voltage regulator
+footprint=SOT23
+description=Current sense amplifier
 author=Ben Gamari <bgamari@gmail.com>
 numslots=0
 
@@ -43,7 +43,9 @@ numslots=0
 #-----------------------------------------------------
 #pinnr	seq	type	style	posit.	net	label	
 #-----------------------------------------------------
-1		pwr	line	b		GND
-2		pwr	line	l		VIN
-3		pwr	line	r		VOUT
-4		pwr	line	l		VIN
+1		in	line	l		REF
+2		pwr	line	l		GND
+3		pwr	line	l		V+
+4		in	line	r		IN+
+5		in	line	r		IN-
+6		out	line	r		OUT

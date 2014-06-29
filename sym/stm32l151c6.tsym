@@ -1,0 +1,96 @@
+[options]
+# wordswap swaps labels if the pin is on the right side an looks like this:
+#   "PB1 (CLK)". That's useful for micro controller port labels
+# rotate_labels rotates the pintext of top and bottom pins
+#   this is useful for large symbols like FPGAs with more than 100 pins
+# sort_labels will sort the pins by it's labels
+#   useful for address ports, busses, ...
+wordswap=yes
+rotate_labels=no
+sort_labels=no
+generate_pinseq=yes
+sym_width=6000
+pinwidthvertical=400
+pinwidthhorizontal=400
+
+[geda_attr]
+# name will be printed in the top of the symbol
+# name is only some graphical text, not an attribute
+# version specifies a gschem version.
+# if you have a device with slots, you'll have to use slot= and slotdef=
+# use comment= if there are special information you want to add
+version=20060113 1
+name=STM32L151Cx
+device=STM32L151Cx
+refdes=U?
+footprint=LQFP48_7
+description=32-bit MCU
+author=Ben Gamari <bgamari@gmail.com>
+numslots=0
+
+[pins]
+# tabseparated list of pin descriptions
+# ----------------------------------------
+# pinnr is the physical number of the pin
+# seq is the pinseq= attribute, leave it blank if it doesn't matter
+# type can be (in, out, io, oc, oe, pas, tp, tri, clk, pwr)
+# style can be (line,dot,clk,dotclk,none). none if only want to add a net
+# posit. can be (l,r,t,b) or empty for nets
+# net specifies the name of the net. Vcc or GND for example.
+# label represents the pinlabel.
+#	negation lines can be added with "\_" example: \_enable\_ 
+#	if you want to write a "\" use "\\" as escape sequence
+#-----------------------------------------------------
+#pinnr	seq	type	style	posit.	net	label	
+#-----------------------------------------------------
+1		pwr	line	l		VLCD
+2		io	line	l		PC13
+3		io	line	l		PC14
+4		io	line	l		PC15
+5		io	line	l		PH0
+6		io	line	l		PH1
+7		in	line	l		\_NRST\_
+8		pwr	line	l		VSSA
+9		pwr	line	l		VDDA
+10		io	line	l		PA0
+11		io	line	l		PA1
+12		io	line	l		PA2
+
+13		io	line	b		PA3
+14		io	line	b		PA4
+15		io	line	b		PA5
+16		io	line	b		PA6
+17		io	line	b		PA7
+18		io	line	b		PB0
+19		io	line	b		PB1
+20		io	line	b		PB2
+21		io	line	b		PB10
+22		io	line	b		PB11
+23		pwr	line	b		VSS1
+24		pwr	line	b		VDD1
+
+36		pwr	line	r		VDD2
+35		pwr	line	r		VSS2
+34		io	line	r		PA13
+33		io	line	r		PA12
+32		io	line	r		PA11
+31		io	line	r		PA10
+30		io	line	r		PA9
+29		io	line	r		PA8
+28		io	line	r		PB15
+27		io	line	r		PB14
+26		io	line	r		PB13
+25		io	line	r		PB12
+
+48		pwr	line	t		VDD3
+47		pwr	line	t		VSS3
+46		io	line	t		PB9
+45		io	line	t		PB8
+44		in	line	t		BOOT0
+43		io	line	t		PB7
+42		io	line	t		PB6
+41		io	line	t		PB5
+40		io	line	t		PB4
+39		io	line	t		PB3
+38		io	line	t		PA15
+37		io	line	t		PA14
