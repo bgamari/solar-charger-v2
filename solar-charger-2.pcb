@@ -9,7 +9,7 @@ Grid[1000.000000 0.0000 0.0000 0]
 PolyArea[200000000.000000]
 Thermal[0.500000]
 DRC[8.00mil 10.00mil 8.00mil 10.00mil 15.00mil 8.00mil]
-Flags("showdrc,nameonpcb,uniquename,clearnew,snappin,thindrawpoly,onlynames")
+Flags("showdrc,nameonpcb,uniquename,clearnew,snappin,thindrawpoly,locknames")
 Groups("1,c:2,s:3:4:5:6:7:8")
 Styles["Signal,10.00mil,36.00mil,20.00mil,10.00mil:Power,25.00mil,60.00mil,35.00mil,10.00mil:Fat,40.00mil,60.00mil,35.00mil,10.00mil:Skinny,6.00mil,24.02mil,11.81mil,6.00mil"]
 
@@ -827,7 +827,6 @@ Via[2275.00mil 1455.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 Via[2335.00mil 1885.00mil 36.00mil 20.00mil 0.0000 20.00mil "" "thermal(1X)"]
 Via[2310.00mil 1835.00mil 36.00mil 20.00mil 0.0000 20.00mil "" "thermal(1X)"]
 Via[2265.00mil 1885.00mil 60.00mil 20.00mil 0.0000 35.00mil "" "thermal(1X)"]
-Via[2565.00mil 1655.00mil 36.00mil 20.00mil 0.0000 20.00mil "" "thermal(1X)"]
 Via[2235.00mil 1225.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 Via[69.0793mm 24.8833mm 36.00mil 20.00mil 0.0000 20.00mil "" "thermal(1X)"]
 Via[66.6305mm 765.40mil 36.00mil 20.00mil 0.0000 20.00mil "" "thermal(1X)"]
@@ -859,6 +858,7 @@ Via[1980.00mil 940.00mil 36.00mil 20.00mil 0.0000 20.00mil "" "thermal(1X)"]
 Via[2740.00mil 940.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 Via[2740.00mil 775.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 Via[2360.00mil 1480.00mil 36.00mil 20.00mil 0.0000 20.00mil "" "thermal(1X)"]
+Via[2580.00mil 1560.00mil 60.00mil 20.00mil 0.0000 35.00mil "" "thermal(1X)"]
 
 Element["" "TI-PWP" "U1" "unknown" 2875.00mil 1450.00mil 95.00mil 1.9370mm 0 100 ""]
 (
@@ -1570,7 +1570,7 @@ Element["" "PTS-810" "BTN2" "unknown" 1980.00mil 730.00mil -270.00mil -70.00mil 
 
 	)
 
-Element["" "Panasonic-EEE-FK-size-C" "C2" "22u" 2650.00mil 1475.00mil -40.00mil 5.0480mm 2 100 ""]
+Element["" "Panasonic-EEE-FK-size-C" "C2" "22u" 2650.00mil 1475.00mil -160.00mil 2.5720mm 0 77 ""]
 (
 	Pad[0.0000 -3.0250mm 0.0000 -1.1750mm 0.6500mm 0.0000 0.6500mm "1" "1" "square"]
 	Pad[0.0000 1.1750mm 0.0000 3.0250mm 0.6500mm 0.0000 0.6500mm "2" "2" "square,edge2"]
@@ -1736,8 +1736,6 @@ Layer(1 "top")
 	Line[63.6150mm 37.6308mm 63.6150mm 40.0170mm 25.00mil 20.00mil "clearline"]
 	Line[2385.00mil 1605.00mil 2475.00mil 1605.00mil 25.00mil 20.00mil "clearline"]
 	Line[2475.00mil 1605.00mil 63.6150mm 40.0170mm 25.00mil 20.00mil "clearline"]
-	Line[2565.00mil 1655.00mil 65.9010mm 1655.00mil 10.00mil 20.00mil "clearline"]
-	Line[65.9010mm 1655.00mil 2595.00mil 42.0490mm 10.00mil 20.00mil "clearline"]
 	Line[2425.00mil 1480.00mil 2425.00mil 1300.00mil 10.00mil 20.00mil "clearline"]
 	Line[2464.00mil 1398.00mil 2464.00mil 34.1616mm 10.00mil 20.00mil "clearline"]
 	Line[2464.00mil 34.1616mm 62.3330mm 1335.00mil 10.00mil 20.00mil "clearline"]
@@ -1941,6 +1939,13 @@ Layer(1 "top")
 	Line[2360.00mil 36.8180mm 2360.00mil 1480.00mil 10.00mil 20.00mil "clearline"]
 	Line[2360.00mil 35.3180mm 2360.00mil 1345.00mil 10.00mil 20.00mil "clearline"]
 	Line[2360.00mil 1345.00mil 2370.00mil 1335.00mil 10.00mil 20.00mil "clearline"]
+	Line[2595.00mil 42.0490mm 2595.00mil 1605.00mil 25.00mil 20.00mil "clearline"]
+	Line[2595.00mil 1605.00mil 2600.00mil 1600.00mil 25.00mil 20.00mil "clearline"]
+	Line[2600.00mil 1600.00mil 66.1350mm 1600.00mil 25.00mil 20.00mil "clearline"]
+	Line[66.1350mm 1600.00mil 2650.00mil 39.4650mm 25.00mil 20.00mil "clearline"]
+	Line[2580.00mil 1560.00mil 2595.00mil 1575.00mil 25.00mil 20.00mil "clearline"]
+	Line[2595.00mil 1575.00mil 2595.00mil 1620.00mil 25.00mil 20.00mil "clearline"]
+	Line[73.6750mm 39.8000mm 74.3250mm 39.8000mm 10.00mil 20.00mil "clearline"]
 )
 Layer(2 "ground")
 (
