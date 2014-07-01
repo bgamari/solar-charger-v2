@@ -9,7 +9,7 @@ Grid[1000.000000 0.0000 0.0000 0]
 PolyArea[200000000.000000]
 Thermal[0.500000]
 DRC[8.00mil 10.00mil 8.00mil 10.00mil 15.00mil 8.00mil]
-Flags("showdrc,nameonpcb,uniquename,clearnew,snappin,thindrawpoly,locknames")
+Flags("showdrc,nameonpcb,uniquename,clearnew,snappin,thindrawpoly,onlynames")
 Groups("1,c:2,s:3:4:5:6:7:8")
 Styles["Signal,10.00mil,36.00mil,20.00mil,10.00mil:Power,25.00mil,60.00mil,35.00mil,10.00mil:Fat,40.00mil,60.00mil,35.00mil,10.00mil:Skinny,6.00mil,24.02mil,11.81mil,6.00mil"]
 
@@ -1522,17 +1522,6 @@ Element["" "0603" "C3" "4.7n" 2970.00mil 1220.00mil 30.00mil -1.3650mm 0 77 ""]
 
 	)
 
-Element["" "0603" "R17" "10k" 68.0600mm 1100.00mil 1.5480mm -0.4760mm 0 76 ""]
-(
-	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "square"]
-	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "square"]
-	ElementLine [-1.2524mm -0.5524mm 1.2524mm -0.5524mm 6.00mil]
-	ElementLine [1.2524mm -0.5524mm 1.2524mm 0.5524mm 6.00mil]
-	ElementLine [-1.2524mm 0.5524mm 1.2524mm 0.5524mm 6.00mil]
-	ElementLine [-1.2524mm -0.5524mm -1.2524mm 0.5524mm 6.00mil]
-
-	)
-
 Element["" "HEADER2_1" "TEMP" "unknown" 3090.00mil 1580.00mil -30.00mil -60.00mil 1 100 ""]
 (
 	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 38.00mil "1" "1" "square"]
@@ -1624,6 +1613,17 @@ Element["" "0603" "R13" "2k" 2360.00mil 1420.00mil -100.00mil -1.7460mm 0 77 ""]
 	ElementLine [-0.5524mm -1.2524mm 0.5524mm -1.2524mm 6.00mil]
 	ElementLine [0.5524mm -1.2524mm 0.5524mm 1.2524mm 6.00mil]
 	ElementLine [-0.5524mm 1.2524mm 0.5524mm 1.2524mm 6.00mil]
+
+	)
+
+Element["" "0603" "R17" "10k" 67.8060mm 1100.00mil 1.5720mm -0.4760mm 0 76 ""]
+(
+	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "square"]
+	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "square"]
+	ElementLine [-1.2524mm 0.5524mm 1.2524mm 0.5524mm 6.00mil]
+	ElementLine [-1.2524mm -0.5524mm -1.2524mm 0.5524mm 6.00mil]
+	ElementLine [-1.2524mm -0.5524mm 1.2524mm -0.5524mm 6.00mil]
+	ElementLine [1.2524mm -0.5524mm 1.2524mm 0.5524mm 6.00mil]
 
 	)
 Layer(1 "top")
@@ -1900,11 +1900,6 @@ Layer(1 "top")
 	Line[3080.00mil 1160.00mil 2980.00mil 1060.00mil 10.00mil 20.00mil "clearline"]
 	Line[2980.00mil 1060.00mil 2910.00mil 1060.00mil 10.00mil 20.00mil "clearline"]
 	Line[2910.00mil 1060.00mil 2870.00mil 1100.00mil 10.00mil 20.00mil "clearline"]
-	Line[67.5602mm 26.4234mm 67.5602mm 27.6898mm 10.00mil 20.00mil "clearline"]
-	Line[67.5602mm 27.6898mm 2650.00mil 1100.00mil 10.00mil 20.00mil "clearline"]
-	Line[68.0601mm 26.4234mm 68.0601mm 27.1901mm 10.00mil 20.00mil "clearline"]
-	Line[68.0601mm 27.1901mm 68.8100mm 1100.00mil 10.00mil 20.00mil "clearline"]
-	Line[68.8100mm 1100.00mil 2780.00mil 1100.00mil 10.00mil 20.00mil "clearline"]
 	Line[63.1116mm 884.85mil 62.3608mm 884.85mil 10.00mil 20.00mil "clearline"]
 	Line[62.3608mm 884.85mil 2390.00mil 950.00mil 10.00mil 20.00mil "clearline"]
 	Line[2390.00mil 950.00mil 2390.00mil 970.00mil 10.00mil 20.00mil "clearline"]
@@ -1946,6 +1941,14 @@ Layer(1 "top")
 	Line[2580.00mil 1560.00mil 2595.00mil 1575.00mil 25.00mil 20.00mil "clearline"]
 	Line[2595.00mil 1575.00mil 2595.00mil 1620.00mil 25.00mil 20.00mil "clearline"]
 	Line[73.6750mm 39.8000mm 74.3250mm 39.8000mm 10.00mil 20.00mil "clearline"]
+	Line[67.5602mm 26.4234mm 67.5602mm 27.1742mm 10.00mil 20.00mil "clearline"]
+	Line[67.5602mm 27.1742mm 2690.00mil 1100.00mil 10.00mil 20.00mil "clearline"]
+	Line[2780.00mil 1100.00mil 2770.00mil 1100.00mil 10.00mil 20.00mil "clearline"]
+	Line[2770.00mil 1100.00mil 2740.00mil 1130.00mil 10.00mil 20.00mil "clearline"]
+	Line[2740.00mil 1130.00mil 2670.00mil 1130.00mil 10.00mil 20.00mil "clearline"]
+	Line[2670.00mil 1130.00mil 2640.00mil 1100.00mil 10.00mil 20.00mil "clearline"]
+	Line[2640.00mil 1100.00mil 2640.00mil 26.4274mm 10.00mil 20.00mil "clearline"]
+	Line[2640.00mil 26.4274mm 67.0601mm 26.4234mm 10.00mil 20.00mil "clearline"]
 )
 Layer(2 "ground")
 (
@@ -2098,7 +2101,7 @@ NetList()
 	(
 		Connect("R17-1")
 		Connect("TEMP-1")
-		Connect("U5-20")
+		Connect("U5-18")
 	)
 	Net("BAT_TEMP_EN" "(unknown)")
 	(
