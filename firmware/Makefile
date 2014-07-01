@@ -26,7 +26,7 @@ CFLAGS          += -I$(TOOLCHAIN_DIR)/include
 LDFLAGS         += -L$(TOOLCHAIN_DIR)/lib -L$(TOOLCHAIN_DIR)/lib/stm32/l1
 SCRIPT_DIR      = $(TOOLCHAIN_DIR)/share
 
-OBJS		+= $(BINARY).o usart.o clock.o charge.o leds.o adc.o
+OBJS		+= $(BINARY).o usart.o clock.o charge.o leds.o adc.o timeout.o
 
 OOCD		?= openocd
 OOCD_INTERFACE	?= flossjtag
