@@ -5,11 +5,14 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
 #include <libopencm3/stm32/rcc.h>
+
 #include "clock.h"
 #include "charge.h"
 #include "adc.h"
 #include "timeout.h"
 #include "thermistor.h"
+
+#define NOT_USED(x) ( (void)(x) )
 
 const uint32_t cell_v = 1400; // charged cell voltage in millivolts
 const uint32_t n_cells = 6;
@@ -19,19 +22,20 @@ const uint32_t trickle_current = 10; // milliamps
 const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge rate in seconds
 const uint32_t iteration_time = 1; // update charge feedback in seconds
 
-enum charge_rate {
-  TRICKLE, // trickle charge
-  CHARGE,  // maximum power-point tracking
-};
-
 static bool charging = false;
 static enum charge_rate rate = CHARGE;
 static uint16_t charge_offset;
+static uint32_t last_power = 0; // for MPPT
 
 static struct timeout_ctx retry_timeout, iteration_timeout;
 
 static void set_charge_en(void) { gpio_set(GPIOB, GPIO15); }
 static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO15); }
+
+static void update_charge_offset(void)
+{
+  dac_load_data_buffer_single(CHANNEL_1, RIGHT12, charge_offset);
+}
 
 void charge_init(void)
 {
@@ -82,25 +86,42 @@ static bool charge_update(void)
 
   if (rate == CHARGE) {
     uint32_t power = bat_i * bat_v / 1000; // in milliwatts
-    // TODO: MPPT
+    // FIXME: Better MPPT
+    if (power < last_power)
+      charge_offset++;
+    else
+      charge_offset--;
+    last_power = power;
+
   } else if (rate == TRICKLE) {
     if (bat_i > trickle_current)
       charge_offset++;
     else
       charge_offset--;
   }
+  update_charge_offset();
   return false;
+}
+
+void charge_set_rate(enum charge_rate new_rate)
+{
+  if (rate == new_rate)
+    return;
+  last_power = 0;
+  rate = new_rate;
 }
 
 static void retry_charge(void *unused)
 {
-  rate = CHARGE;
+  NOT_USED(unused);
+  charge_set_rate(CHARGE);
 }
 
 static void charge_iteration(void *unused)
 {
+  NOT_USED(unused);
   if (charge_update()) {
-    rate = TRICKLE;
+    charge_set_rate(TRICKLE);
     timeout_add(&retry_timeout, charge_retry_time * 1000, retry_charge, NULL);
   } else {
     timeout_add(&iteration_timeout, iteration_time, charge_iteration, NULL);
@@ -116,7 +137,7 @@ void charge_start(void)
   adc_power_on(ADC1);
   delay_ms(1); // wait for DAC and ADC to come up
   charge_offset = (1 << 12) - 1;
-  dac_load_data_buffer_single(CHANNEL_1, RIGHT12, charge_offset);
+  update_charge_offset();
   adc_set_sample_time_on_all_channels(ADC1, ADC_SMPR_SMP_16CYC);
   adc_disable_scan_mode(ADC1);
   set_charge_en();
