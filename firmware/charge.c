@@ -26,6 +26,7 @@ static bool charging = false;
 static enum charge_rate rate = CHARGE;
 static uint16_t charge_offset;
 static uint32_t last_power = 0; // for MPPT
+static uint32_t perturbation = 10; // codepoints
 
 static struct timeout_ctx retry_timeout, iteration_timeout;
 
@@ -86,11 +87,10 @@ static bool charge_update(void)
 
   if (rate == CHARGE) {
     uint32_t power = bat_i * bat_v / 1000; // in milliwatts
-    // FIXME: Better MPPT
+    // Perturb and observe
     if (power < last_power)
-      charge_offset++;
-    else
-      charge_offset--;
+      perturbation *= -1;
+    charge_offset += perturbation;
     last_power = power;
 
   } else if (rate == TRICKLE) {
