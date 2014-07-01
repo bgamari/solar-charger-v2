@@ -1,7 +1,3 @@
-#include "clock.h"
-#include "charge.h"
-#include "adc.h"
-#include "timeout.h"
 #include <stddef.h>
 #include <libopencm3/cm3/nvic.h>
 #include <libopencm3/stm32/dac.h>
@@ -9,6 +5,11 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
 #include <libopencm3/stm32/rcc.h>
+#include "clock.h"
+#include "charge.h"
+#include "adc.h"
+#include "timeout.h"
+#include "thermistor.h"
 
 const uint32_t cell_v = 1400; // charged cell voltage in millivolts
 const uint32_t n_cells = 6;
@@ -49,16 +50,15 @@ void charge_init(void)
   charge_stop();
 }
 
-// returns temperature in milli-Kelvin
-static uint32_t sample_battery_temp(void)
+// returns temperature in centi-Kelvin
+static unsigned int sample_battery_temp(void)
 {
   uint16_t sample;
   uint8_t sequence[1] = {9};
   gpio_clear(GPIOB, GPIO1);
   adc_take_sample(1, sequence, &sample);
   gpio_set(GPIOB, GPIO1);
-  // TODO: Convert
-  return sample;
+  return lookup_temperature(sample);
 }
 
 // returns whether to terminate the charging process
