@@ -88,3 +88,8 @@ clean:
 .PHONY: images clean
 
 -include $(OBJS:.o=.d)
+
+thermistor-lut.c : Thermistor.hs
+	runghc $<
+
+thermistor.o : thermistor-lut.c
