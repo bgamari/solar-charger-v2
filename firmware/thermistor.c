@@ -16,12 +16,12 @@ unsigned int lookup_temperature(uint16_t codepoint)
 {
   unsigned int i = 0;
   for (; i < lut_size; i++) {
-    if (lut[i].codepoint < codepoint)
+    if (lut[i].codepoint > codepoint)
       break;
   }
   
-  if (i == lut_size-1)
+  if (i == 0)
     return 0;
   else
-    return lut[i].temp + (codepoint - lut[i].codepoint) * (lut[i+1].temp - lut[i].temp) / (lut[i+1].codepoint - lut[i].codepoint);
+    return lut[i-1].temp + (codepoint - lut[i-1].codepoint) * (lut[i].temp - lut[i-1].temp) / (lut[i].codepoint - lut[i-1].codepoint);
 }
