@@ -86,14 +86,15 @@ static bool charge_update(void)
     return true;
 
   if (rate == CHARGE) {
+    // Perturb and observe maximum power-point tracking
     uint32_t power = bat_i * bat_v / 1000; // in milliwatts
-    // Perturb and observe
     if (power < last_power)
       perturbation *= -1;
     charge_offset += perturbation;
     last_power = power;
 
   } else if (rate == TRICKLE) {
+    // Track trickle current
     if (bat_i > trickle_current)
       charge_offset++;
     else
