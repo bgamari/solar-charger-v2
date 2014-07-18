@@ -5,7 +5,7 @@ FileVersion[20091103]
 
 PCB["" 6000.00mil 5000.00mil]
 
-Grid[1000.000000 0.0000 0.0000 0]
+Grid[500.000000 0.0000 0.0000 0]
 PolyArea[200000000.000000]
 Thermal[0.500000]
 DRC[8.00mil 10.00mil 8.00mil 10.00mil 15.00mil 8.00mil]
@@ -786,7 +786,7 @@ Symbol['~' 12.00mil]
 	SymbolLine[20.00mil 35.00mil 25.00mil 30.00mil 8.00mil]
 )
 Attribute("PCB::grid::unit" "mil")
-Attribute("PCB::grid::size" "10.00mil")
+Attribute("PCB::grid::size" "5.00mil")
 Via[2050.00mil 1450.00mil 60.00mil 20.00mil 0.0000 35.00mil "" ""]
 Via[2050.00mil 1500.00mil 60.00mil 20.00mil 0.0000 35.00mil "" ""]
 Via[2200.00mil 1450.00mil 60.00mil 20.00mil 0.0000 35.00mil "" ""]
@@ -2053,15 +2053,15 @@ Layer(10 "silk")
 	Line[3060.00mil 1760.00mil 3120.00mil 1760.00mil 10.00mil 20.00mil "clearline"]
 	Line[3070.00mil 1780.00mil 3110.00mil 1780.00mil 10.00mil 20.00mil "clearline"]
 	Line[3080.00mil 1800.00mil 3100.00mil 1800.00mil 10.00mil 20.00mil "clearline"]
-	Text[2890.00mil 1050.00mil 1 77 "TMS" "clearline"]
+	Text[2890.00mil 955.00mil 1 77 "TMS" "clearline"]
 	Text[2835.00mil 845.00mil 1 77 "TDI" "clearline"]
-	Text[2835.00mil 1045.00mil 1 77 "TCK" "clearline"]
+	Text[2890.00mil 845.00mil 1 77 "TCK" "clearline"]
 	Text[2890.00mil 765.00mil 1 77 "TRST" "clearline"]
 	Text[2835.00mil 955.00mil 1 77 "GND" "clearline"]
 	Text[2835.00mil 750.00mil 1 77 "TDO" "clearline"]
 	Text[1730.00mil 990.00mil 0 100 "v2" "clearline"]
-	Text[2890.00mil 950.00mil 1 77 "TXD" "clearline"]
-	Text[2890.00mil 855.00mil 1 77 "RXD" "clearline"]
+	Text[2835.00mil 1050.00mil 1 77 "TXD" "clearline"]
+	Text[2890.00mil 1050.00mil 1 77 "RXD" "clearline"]
 )
 NetList()
 (
