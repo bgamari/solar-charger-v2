@@ -1635,6 +1635,17 @@ Element["" "0805" "C1" "100n" 2595.00mil 1300.00mil -31.50mil -31.50mil 0 100 ""
 	ElementLine [-3.93mil 27.55mil 3.93mil 27.55mil 8.00mil]
 
 	)
+
+Element["onsolder" "0603" "R11" "10k" 2560.00mil 660.00mil -120.00mil 0.6030mm 0 76 "auto"]
+(
+	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
+	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 0.4064mm 0.8524mm "2" "2" "onsolder,square"]
+	ElementLine [-1.2524mm 0.5524mm 1.2524mm 0.5524mm 6.00mil]
+	ElementLine [1.2524mm -0.5524mm 1.2524mm 0.5524mm 6.00mil]
+	ElementLine [-1.2524mm -0.5524mm 1.2524mm -0.5524mm 6.00mil]
+	ElementLine [-1.2524mm -0.5524mm -1.2524mm 0.5524mm 6.00mil]
+
+	)
 Layer(1 "top")
 (
 	Line[1925.00mil 32.9100mm 50.0550mm 32.9100mm 25.00mil 20.00mil "clearline"]
@@ -2008,8 +2019,6 @@ Layer(2 "ground")
 	Line[69.4570mm 815.00mil 2715.00mil 21.1970mm 10.00mil 20.00mil "clearline"]
 	Line[2745.00mil 1065.00mil 2885.00mil 1065.00mil 10.00mil 20.00mil "clearline"]
 	Line[2885.00mil 1065.00mil 2920.00mil 1100.00mil 10.00mil 20.00mil "clearline"]
-	Line[2620.00mil 660.00mil 2620.00mil 17.7680mm 25.00mil 20.00mil "clearline"]
-	Line[2620.00mil 17.7680mm 65.5200mm 740.00mil 25.00mil 20.00mil "clearline"]
 	Line[2265.00mil 1140.00mil 2370.00mil 1140.00mil 25.00mil 20.00mil "clearline"]
 	Line[2370.00mil 1140.00mil 2390.00mil 1120.00mil 25.00mil 20.00mil "clearline"]
 	Line[2275.00mil 1405.00mil 2260.00mil 1420.00mil 10.00mil 20.00mil "clearline"]
@@ -2018,6 +2027,8 @@ Layer(2 "ground")
 	Line[2315.00mil 1470.00mil 2315.00mil 1575.00mil 10.00mil 20.00mil "clearline"]
 	Line[2745.00mil 1065.00mil 2665.00mil 985.00mil 10.00mil 20.00mil "clearline"]
 	Line[2665.00mil 985.00mil 2645.00mil 985.00mil 10.00mil 20.00mil "clearline"]
+	Line[64.2740mm 660.00mil 2505.00mil 660.00mil 10.00mil 20.00mil ""]
+	Line[2530.00mil 660.00mil 2620.00mil 660.00mil 10.00mil 20.00mil "clearline"]
 	Polygon("clearpoly")
 	(
 		[1700.00mil 1950.00mil] [3150.00mil 1950.00mil] [3150.00mil 625.00mil] [1700.00mil 625.00mil] 
@@ -2206,6 +2217,8 @@ NetList()
 		Connect("R5-1")
 		Connect("R8-1")
 		Connect("R10-1")
+		Connect("R11-1")
+		Connect("R11-2")
 		Connect("R13-2")
 		Connect("RESET-2")
 		Connect("TEMP-2")
