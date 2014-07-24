@@ -2072,7 +2072,7 @@ Layer(9 "silk")
 	Text[1770.00mil 1665.00mil 0 100 "Ben Gamari" "clearline,onsolder"]
 	Text[1770.00mil 1590.00mil 0 100 "<bgamari@smart-cactus.org>" "clearline,onsolder"]
 	Text[2385.00mil 1660.00mil 0 100 "(c) 2014" "clearline,onsolder"]
-	Text[2325.00mil 1775.00mil 0 100 "v2.0" "clearline,onsolder"]
+	Text[2325.00mil 1775.00mil 0 100 "v3.0" "clearline,onsolder"]
 	Text[2900.00mil 775.00mil 1 100 "TCK" "clearline,onsolder"]
 	Text[2840.00mil 775.00mil 1 99 "TDI" "clearline,onsolder"]
 	Text[2840.00mil 660.00mil 1 99 "TDO" "clearline,onsolder"]
@@ -2106,7 +2106,7 @@ Layer(10 "silk")
 	Text[2890.00mil 765.00mil 1 77 "TRST" "clearline"]
 	Text[2835.00mil 955.00mil 1 77 "GND" "clearline"]
 	Text[2835.00mil 750.00mil 1 77 "TDO" "clearline"]
-	Text[1730.00mil 990.00mil 0 100 "v2" "clearline"]
+	Text[1730.00mil 990.00mil 0 100 "v3" "clearline"]
 	Text[2835.00mil 1050.00mil 1 77 "TXD" "clearline"]
 	Text[2890.00mil 1050.00mil 1 77 "RXD" "clearline"]
 )
