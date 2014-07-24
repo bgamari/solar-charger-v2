@@ -833,7 +833,6 @@ Via[2390.00mil 1120.00mil 60.00mil 20.00mil 0.0000 35.00mil "" ""]
 Via[2275.00mil 1405.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 Via[2535.00mil 765.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 Via[2240.00mil 1070.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
-Via[2660.00mil 990.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 Via[2780.00mil 1200.00mil 36.00mil 20.00mil 0.0000 20.00mil "" "thermal(1X)"]
 Via[2820.00mil 1160.00mil 36.00mil 20.00mil 0.0000 20.00mil "" "thermal(1X)"]
 Via[2870.00mil 1100.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
@@ -857,6 +856,7 @@ Via[3120.00mil 1230.00mil 36.00mil 20.00mil 0.0000 20.00mil "" "thermal(1X)"]
 Via[2305.00mil 1460.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 Via[2315.00mil 1575.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 Via[2260.00mil 1550.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
+Via[2645.00mil 985.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 
 Element["" "TI-PWP" "U1" "unknown" 2875.00mil 1450.00mil 95.00mil 1.9370mm 0 100 ""]
 (
@@ -1806,8 +1806,6 @@ Layer(1 "top")
 	Line[73.6750mm 32.7510mm 2940.00mil 1250.00mil 10.00mil 20.00mil "clearline"]
 	Line[2940.00mil 1250.00mil 2970.00mil 1250.00mil 10.00mil 20.00mil "clearline"]
 	Line[65.0601mm 1040.00mil 65.0601mm 25.6179mm 10.00mil 20.00mil "clearline"]
-	Line[65.0601mm 25.6179mm 2580.00mil 990.00mil 10.00mil 20.00mil "clearline"]
-	Line[2580.00mil 990.00mil 2660.00mil 990.00mil 10.00mil 20.00mil "clearline"]
 	Line[65.5602mm 26.4234mm 65.5602mm 27.2062mm 10.00mil 20.00mil "clearline"]
 	Line[65.5602mm 27.1498mm 65.5602mm 28.7302mm 10.00mil 20.00mil "clearline"]
 	Line[65.5602mm 28.7302mm 2600.00mil 1150.00mil 10.00mil 20.00mil "clearline"]
@@ -1971,6 +1969,11 @@ Layer(1 "top")
 	Line[59.6290mm 1737.00mil 59.6290mm 40.8330mm 10.00mil 20.00mil "clearline"]
 	Line[2260.00mil 1550.00mil 2260.00mil 1720.00mil 10.00mil 20.00mil "clearline"]
 	Line[2260.00mil 1720.00mil 2277.50mil 1737.50mil 10.00mil 20.00mil "clearline"]
+	Line[68.0601mm 26.4234mm 68.0601mm 25.5389mm 10.00mil 20.00mil "clearline"]
+	Line[68.0601mm 25.5389mm 2705.00mil 980.00mil 10.00mil 20.00mil "clearline"]
+	Line[2705.00mil 980.00mil 2720.00mil 980.00mil 10.00mil 20.00mil "clearline"]
+	Line[2645.00mil 985.00mil 2585.00mil 985.00mil 10.00mil 20.00mil "clearline"]
+	Line[65.0601mm 25.6179mm 2585.00mil 985.00mil 10.00mil 20.00mil "clearline"]
 )
 Layer(2 "ground")
 (
@@ -1984,9 +1987,7 @@ Layer(2 "ground")
 	Line[64.2740mm 19.3160mm 2535.00mil 765.00mil 25.00mil 20.00mil "clearline"]
 	Line[2190.00mil 29.9780mm 54.3620mm 29.9780mm 10.00mil 20.00mil ""]
 	Line[51.4760mm 29.9780mm 52.8260mm 29.9780mm 10.00mil 20.00mil ""]
-	Line[2660.00mil 990.00mil 2670.00mil 990.00mil 10.00mil 20.00mil "clearline"]
 	Line[2870.00mil 1100.00mil 2780.00mil 1100.00mil 10.00mil 20.00mil "clearline"]
-	Line[2670.00mil 990.00mil 2745.00mil 1065.00mil 10.00mil 20.00mil "clearline"]
 	Line[2535.00mil 765.00mil 64.0200mm 19.0620mm 25.00mil 20.00mil "clearline"]
 	Line[64.0200mm 19.0620mm 64.0200mm 740.00mil 25.00mil 20.00mil "clearline"]
 	Line[2590.00mil 740.00mil 65.5200mm 740.00mil 25.00mil 20.00mil "clearline"]
@@ -2015,6 +2016,8 @@ Layer(2 "ground")
 	Line[2260.00mil 1420.00mil 2260.00mil 1550.00mil 10.00mil 20.00mil "clearline"]
 	Line[2305.00mil 1460.00mil 2315.00mil 1470.00mil 10.00mil 20.00mil "clearline"]
 	Line[2315.00mil 1470.00mil 2315.00mil 1575.00mil 10.00mil 20.00mil "clearline"]
+	Line[2745.00mil 1065.00mil 2665.00mil 985.00mil 10.00mil 20.00mil "clearline"]
+	Line[2665.00mil 985.00mil 2645.00mil 985.00mil 10.00mil 20.00mil "clearline"]
 	Polygon("clearpoly")
 	(
 		[1700.00mil 1950.00mil] [3150.00mil 1950.00mil] [3150.00mil 625.00mil] [1700.00mil 625.00mil] 
@@ -2219,6 +2222,7 @@ NetList()
 		Connect("U3-9")
 		Connect("U4-2")
 		Connect("U5-8")
+		Connect("U5-20")
 		Connect("U5-23")
 		Connect("U5-35")
 		Connect("U5-44")
