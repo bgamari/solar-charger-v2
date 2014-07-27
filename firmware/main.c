@@ -61,6 +61,7 @@ int main(void)
 
   while (1) {
     //__asm__("wfi");
+    timeout_poll();
   }
 }
 

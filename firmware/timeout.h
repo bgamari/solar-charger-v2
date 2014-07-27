@@ -23,3 +23,5 @@ void timeout_init(void);
 
 void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
                  timeout_cb cb, void *cbdata);
+
+void timeout_poll(void);

@@ -8,7 +8,10 @@
 static struct timeout_time cur_time = {.raw = 0}; // lazily updated, in milliseconds
 static uint32_t prescaler;
 
-struct timeout_ctx *head;
+// Waiting for their time to be executed
+struct timeout_ctx *scheduled = NULL;
+// Waiting to execute
+struct timeout_ctx *pending = NULL;
 
 void timeout_init(void)
 {
@@ -32,11 +35,11 @@ static void timeout_update_time(void)
 
 static void timeout_reschedule(void)
 {
-  if (head == NULL) {
+  if (scheduled == NULL) {
     timer_disable_irq(TIM4, TIM_DIER_CC1IE);
     timer_disable_counter(TIM4);
   } else {
-    timer_set_oc_value(TIM4, TIM_OC1, head->time.count);
+    timer_set_oc_value(TIM4, TIM_OC1, scheduled->time.count);
     timer_enable_irq(TIM4, TIM_DIER_CC1IE);
   }
 }
@@ -50,7 +53,7 @@ void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
   ctx->cbdata = cbdata;
 
   cm_disable_interrupts();
-  struct timeout_ctx **last = &head;
+  struct timeout_ctx **last = &scheduled;
   while (true) {
     if (*last == NULL)
       break;
@@ -62,12 +65,13 @@ void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
   *last = ctx;
   cm_enable_interrupts();
 
-  if (last == &head)
+  if (last == &scheduled)
     timeout_reschedule();
 }
 
 void tim4_isr(void)
 {
+  struct timeout_ctx **pending_tail = NULL;
   timeout_update_time();
   if (timer_get_flag(TIM4, TIM_SR_UIF)) {
     timer_clear_flag(TIM4, TIM_SR_UIF);
@@ -76,21 +80,50 @@ void tim4_isr(void)
 
   if (timer_get_flag(TIM4, TIM_SR_CC1IF)) {
     timer_clear_flag(TIM4, TIM_SR_CC1IF);
-    if (!head) {
+    if (!scheduled) {
       timer_disable_irq(TIM4, TIM_DIER_CC1IE);
     } else {
-      struct timeout_ctx *p = head;
+      struct timeout_ctx *p = scheduled;
       while (p != NULL) {
         if (p->time.raw <= cur_time.raw) {
-          head = p->next;
-          p->cb(p->cbdata);
-          timeout_update_time();
+          scheduled = p->next;
+
+          // find the tail of the pending list if we haven't yet done
+          // so
+          if (pending_tail == NULL) {
+            pending_tail = &pending;
+            while (true) {
+              if (*pending_tail == NULL)
+                break;
+              pending_tail = &(*pending_tail)->next;
+            }
+          }
+
+          // add to end of pending list
+          p->next = NULL;
+          pending = p;
+          pending_tail = &pending;
         } else {
           break;
         }
         p = p->next;
       }
+      timeout_update_time();
       timeout_reschedule();
     }
+  }
+}
+
+// This is where the timeout callbacks are called, out of IRQ context
+void timeout_poll()
+{
+  while (pending != NULL) {
+    cm_disable_interrupts();
+    struct timeout_ctx *p = pending;
+    pending = p->next;
+    cm_enable_interrupts();
+
+    p->next = NULL;
+    p->cb(p->cbdata);
   }
 }
