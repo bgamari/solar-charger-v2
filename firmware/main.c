@@ -45,6 +45,7 @@ int main(void)
   leds_init();
   leds_set(1);
   usart_init();
+  usart_print("hello world\n");
 
   charge_init();
   leds_set(3);
