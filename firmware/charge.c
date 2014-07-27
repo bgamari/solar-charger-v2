@@ -133,6 +133,10 @@ void charge_start(void)
   if (charging)
     return;
   charging = true;
+
+  rcc_periph_clock_enable(RCC_DAC);
+  rcc_periph_clock_enable(RCC_ADC1);
+
   dac_enable(CHANNEL_1);
   adc_power_on(ADC1);
   delay_ms(1); // wait for DAC and ADC to come up
@@ -154,4 +158,6 @@ void charge_stop(void)
   delay_ms(1); // let things stabilize
   dac_disable(CHANNEL_1);
   adc_off(ADC1);
+  rcc_periph_clock_disable(RCC_DAC);
+  rcc_periph_clock_disable(RCC_ADC1);
 }
