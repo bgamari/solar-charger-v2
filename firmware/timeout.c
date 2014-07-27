@@ -66,7 +66,7 @@ void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
     timeout_reschedule();
 }
 
-void tim4_irq(void)
+void tim4_isr(void)
 {
   timeout_update_time();
   if (timer_get_flag(TIM4, TIM_SR_UIF)) {
