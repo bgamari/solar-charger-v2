@@ -15,9 +15,6 @@ void adc_take_sample(unsigned int length, uint8_t *sequence, uint16_t *buf)
   // turn on ADC
   while (ADC_SR(ADC1) & ADC_SR_ADONS);
   adc_power_on(ADC1);
-  //for (int i = 0; i < 800000; i++) { /* Wait a bit. */
-  //  __asm__("nop");
-  //}
 
   // start conversion
   while ((ADC_SR(ADC1) & ADC_SR_ADONS) == 0
