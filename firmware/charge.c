@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include <stdio.h>
 #include <libopencm3/cm3/nvic.h>
 #include <libopencm3/stm32/dac.h>
 #include <libopencm3/stm32/adc.h>
@@ -7,6 +8,7 @@
 #include <libopencm3/stm32/rcc.h>
 
 #include "clock.h"
+#include "usart.h"
 #include "charge.h"
 #include "adc.h"
 #include "timeout.h"
@@ -35,6 +37,9 @@ static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO15); }
 
 static void update_charge_offset(void)
 {
+  char temp[16];
+  snprintf(temp, 16, "o=%d\n", charge_offset);
+  usart_print(temp);
   dac_load_data_buffer_single(charge_offset, RIGHT12, CHANNEL_1);
 }
 
@@ -119,6 +124,7 @@ static void retry_charge(void *unused)
 static void charge_iteration(void *unused)
 {
   NOT_USED(unused);
+  usart_print("iterate\n");
   if (charge_update()) {
     charge_set_rate(TRICKLE);
     timeout_add(&retry_timeout, charge_retry_time * 1000, retry_charge, NULL);
@@ -132,6 +138,7 @@ void charge_start(void)
   if (charging)
     return;
   charging = true;
+  usart_print("charge start\n");
 
   rcc_periph_clock_enable(RCC_DAC);
   rcc_periph_clock_enable(RCC_ADC1);
@@ -152,6 +159,7 @@ void charge_stop(void)
 {
   if (!charging)
     return;
+  usart_print("charge stop\n");
   charging = false;
   clear_charge_en();
   delay_ms(1); // let things stabilize
