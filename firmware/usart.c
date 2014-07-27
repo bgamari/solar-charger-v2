@@ -32,7 +32,7 @@ unsigned int usart_readline(char* buffer, unsigned int length)
   return i;
 }
 
-void configure_usart(void)
+void usart_init(void)
 {
   rcc_peripheral_enable_clock(&RCC_APB2ENR, RCC_APB2ENR_USART1EN);
 
