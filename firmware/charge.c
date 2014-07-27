@@ -149,9 +149,6 @@ void charge_start(void)
   delay_ms(1); // wait for DAC and ADC to come up
   charge_offset = (1 << 12) - 1;
   update_charge_offset();
-  adc_set_sample_time_on_all_channels(ADC1, ADC_SMPR_SMP_16CYC);
-  adc_disable_scan_mode(ADC1);
-  adc_set_single_conversion_mode(ADC1);
   set_charge_en();
   timeout_add(&iteration_timeout, iteration_time, charge_iteration, NULL);
 }

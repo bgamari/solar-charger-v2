@@ -12,11 +12,11 @@ void adc_take_sample(unsigned int length, uint8_t *sequence, uint16_t *buf)
   buffer = buf;
   remaining = length;
   adc_set_regular_sequence(ADC1, length, sequence);
-  adc_disable_scan_mode(ADC1);
-  adc_set_sample_time_on_all_channels(ADC1, ADC_SMPR_SMP_16CYC);
+  adc_enable_scan_mode(ADC1);
+  adc_set_sample_time_on_all_channels(ADC1, ADC_SMPR_SMP_48CYC);
   adc_set_single_conversion_mode(ADC1);
-  adc_enable_eoc_interrupt(ADC1);
   ADC_CR2(ADC1) |= ADC_CR2_EOCS;
+  adc_enable_eoc_interrupt(ADC1);
   nvic_enable_irq(NVIC_ADC1_IRQ);
 
   // turn on ADC
