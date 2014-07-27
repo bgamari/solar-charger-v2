@@ -141,6 +141,8 @@ void charge_start(void)
   usart_print("charge start\n");
 
   rcc_periph_clock_enable(RCC_DAC);
+  rcc_osc_on(HSI);
+  rcc_wait_for_osc_ready(HSI);
   rcc_periph_clock_enable(RCC_ADC1);
 
   dac_enable(CHANNEL_1);
@@ -149,9 +151,8 @@ void charge_start(void)
   update_charge_offset();
   adc_set_sample_time_on_all_channels(ADC1, ADC_SMPR_SMP_16CYC);
   adc_disable_scan_mode(ADC1);
+  adc_set_single_conversion_mode(ADC1);
   set_charge_en();
-  while (ADC_SR(ADC1) & ADC_SR_ADONS);
-  adc_power_on(ADC1);
   timeout_add(&iteration_timeout, iteration_time, charge_iteration, NULL);
 }
 
@@ -164,8 +165,6 @@ void charge_stop(void)
   clear_charge_en();
   delay_ms(1); // let things stabilize
   dac_disable(CHANNEL_1);
-  while (!(ADC_SR(ADC1) & ADC_SR_ADONS));
-  adc_off(ADC1);
   rcc_periph_clock_disable(RCC_DAC);
   rcc_periph_clock_disable(RCC_ADC1);
 }
