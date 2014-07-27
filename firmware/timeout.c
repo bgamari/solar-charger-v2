@@ -12,31 +12,32 @@ struct timeout_ctx *head;
 
 void timeout_init(void)
 {
-  timer_reset(TIM5);
-  nvic_enable_irq(NVIC_TIM5_IRQ);
+  rcc_periph_clock_enable(RCC_TIM4);
+  timer_reset(TIM4);
+  nvic_enable_irq(NVIC_TIM4_IRQ);
 
   // timer tick is 1 millisecond
   prescaler = rcc_ppre1_frequency / 1000;
-  timer_set_prescaler(TIM5, prescaler);
-  timer_set_period(TIM5, 0xffff);
-  timer_enable_irq(TIM5, TIM_DIER_UIE);
-  timer_enable_counter(TIM5);
+  timer_set_prescaler(TIM4, prescaler);
+  timer_set_period(TIM4, 0xffff);
+  timer_enable_irq(TIM4, TIM_DIER_UIE);
+  timer_enable_counter(TIM4);
 }
 
 static void timeout_update_time(void)
 {
-  uint32_t count = timer_get_counter(TIM5);
+  uint32_t count = timer_get_counter(TIM4);
   cur_time.count = count;
 }
 
 static void timeout_reschedule(void)
 {
   if (head == NULL) {
-    timer_disable_irq(TIM5, TIM_DIER_CC1IE);
-    timer_disable_counter(TIM5);
+    timer_disable_irq(TIM4, TIM_DIER_CC1IE);
+    timer_disable_counter(TIM4);
   } else {
-    timer_set_oc_value(TIM5, TIM_OC1, head->time.count);
-    timer_enable_irq(TIM5, TIM_DIER_CC1IE);
+    timer_set_oc_value(TIM4, TIM_OC1, head->time.count);
+    timer_enable_irq(TIM4, TIM_DIER_CC1IE);
   }
 }
 
@@ -65,18 +66,18 @@ void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
     timeout_reschedule();
 }
 
-void tim5_irq(void)
+void tim4_irq(void)
 {
   timeout_update_time();
-  if (timer_get_flag(TIM5, TIM_SR_UIF)) {
-    timer_clear_flag(TIM5, TIM_SR_UIF);
+  if (timer_get_flag(TIM4, TIM_SR_UIF)) {
+    timer_clear_flag(TIM4, TIM_SR_UIF);
     cur_time.epoch++;
   }
 
-  if (timer_get_flag(TIM5, TIM_SR_CC1IF)) {
-    timer_clear_flag(TIM5, TIM_SR_CC1IF);
+  if (timer_get_flag(TIM4, TIM_SR_CC1IF)) {
+    timer_clear_flag(TIM4, TIM_SR_CC1IF);
     if (!head) {
-      timer_disable_irq(TIM5, TIM_DIER_CC1IE);
+      timer_disable_irq(TIM4, TIM_DIER_CC1IE);
     } else {
       struct timeout_ctx *p = head;
       while (p != NULL) {
