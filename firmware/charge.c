@@ -35,7 +35,7 @@ static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO15); }
 
 static void update_charge_offset(void)
 {
-  dac_load_data_buffer_single(CHANNEL_1, RIGHT12, charge_offset);
+  dac_load_data_buffer_single(charge_offset, RIGHT12, CHANNEL_1);
 }
 
 void charge_init(void)
