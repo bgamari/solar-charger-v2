@@ -40,6 +40,7 @@ static void timeout_reschedule(void)
     timer_disable_counter(TIM4);
   } else {
     timer_set_oc_value(TIM4, TIM_OC1, scheduled->time.count);
+    timer_enable_counter(TIM4);
     timer_enable_irq(TIM4, TIM_DIER_CC1IE);
   }
 }
@@ -52,6 +53,7 @@ void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
   ctx->cb = cb;
   ctx->cbdata = cbdata;
 
+  // Add timeout to scheduled list
   cm_disable_interrupts();
   struct timeout_ctx **last = &scheduled;
   while (true) {
@@ -65,6 +67,7 @@ void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
   *last = ctx;
   cm_enable_interrupts();
 
+  // If we added to the head of the list we need to reschedule
   if (last == &scheduled)
     timeout_reschedule();
 }
