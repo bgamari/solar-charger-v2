@@ -50,7 +50,6 @@ void charge_init(void)
   gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO1);  // BAT_TEMP_EN
   gpio_mode_setup(GPIOB, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO2);  // BAT_TEMP
 
-  rcc_periph_clock_enable(RCC_TIM5);
   charge_stop();
 }
 
@@ -153,7 +152,6 @@ void charge_stop(void)
   if (!charging)
     return;
   charging = false;
-  timer_disable_counter(TIM5);
   clear_charge_en();
   delay_ms(1); // let things stabilize
   dac_disable(CHANNEL_1);
