@@ -124,7 +124,7 @@ static void charge_iteration(void *unused)
     charge_set_rate(TRICKLE);
     timeout_add(&retry_timeout, charge_retry_time * 1000, retry_charge, NULL);
   } else {
-    timeout_add(&iteration_timeout, iteration_time, charge_iteration, NULL);
+    timeout_add(&iteration_timeout, iteration_time * 1000, charge_iteration, NULL);
   }
 }
 
