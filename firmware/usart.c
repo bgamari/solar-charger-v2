@@ -1,3 +1,4 @@
+#include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/usart.h>
 #include <libopencm3/stm32/rcc.h>
 #include "usart.h"
@@ -34,6 +35,8 @@ unsigned int usart_readline(char* buffer, unsigned int length)
 
 void usart_init(void)
 {
+  gpio_set_af(GPIOA, GPIO_AF7, GPIO9 | GPIO10);
+  gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO9 | GPIO10);
   rcc_peripheral_enable_clock(&RCC_APB2ENR, RCC_APB2ENR_USART1EN);
 
   usart_enable(USART1);
@@ -41,7 +44,7 @@ void usart_init(void)
   usart_set_stopbits(USART1, USART_STOPBITS_1);
   usart_set_parity(USART1, USART_PARITY_NONE);
   usart_set_mode(USART1, USART_MODE_TX_RX);
-  usart_set_baudrate(USART1, 115200);
+  usart_set_baudrate(USART1, 9600);
   usart_enable_rx_interrupt(USART1);
 }
 
