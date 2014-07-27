@@ -27,8 +27,8 @@ int buttons_init(void)
 
 int main(void)
 {
-  const clock_scale_t* clk = &clock_config[CLOCK_VRANGE1_MSI_RAW_2MHZ];
-  rcc_clock_setup_msi(clk);
+  //const clock_scale_t* clk = &clock_config[CLOCK_VRANGE1_MSI_RAW_2MHZ];
+  //rcc_clock_setup_msi(clk);
 
   //PWR_CR = (PWR_CR & ~(0x7 << 5)) | (0x6 << 5) | PWR_CR_PVDE; // PVD = 3.1V
   //exti_enable_request(EXTI16); // PVD interrupt
@@ -43,16 +43,23 @@ int main(void)
   // LEDs
   gpio_mode_setup(GPIOC, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO13 | GPIO14 | GPIO15);
   leds_init();
-  for (int i=0; i <= 8; i++) {
+  leds_set(1);
+  usart_init();
+
+  charge_init();
+  leds_set(3);
+
+  charge_start();
+
+  for (int i=2; 1; i++) {
     leds_set(i);
-    delay_ms(100);
+    delay_ms(20);
   }
 
   buttons_init();
-  charge_init();
 
   while (1) {
-    __asm__("wfi");
+    //__asm__("wfi");
   }
 }
 
