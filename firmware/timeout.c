@@ -49,6 +49,9 @@ void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
                  timeout_cb cb, void *cbdata)
 {
   timeout_update_time();
+  // make sure it's not already scheduled
+  if (ctx->cb != NULL)
+    while(1);
   ctx->time.raw = cur_time.raw + millis;
   ctx->cb = cb;
   ctx->cbdata = cbdata;
@@ -123,10 +126,12 @@ void timeout_poll()
   while (pending != NULL) {
     cm_disable_interrupts();
     struct timeout_ctx *p = pending;
+    timeout_cb cb = p->cb;
     pending = p->next;
     cm_enable_interrupts();
 
+    p->cb = NULL; // so we know whether it's scheduled
     p->next = NULL;
-    p->cb(p->cbdata);
+    cb(p->cbdata);
   }
 }
