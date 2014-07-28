@@ -21,7 +21,7 @@ static unsigned int waiting_tx_bytes(void)
     return tx_head - tx_tail;
 }
 
-int usart_putc(char c)
+unsigned int usart_putc(char c)
 {
   unsigned int next = (tx_head + 1) % sizeof(tx_buf);
   if (waiting_tx_bytes() == sizeof(tx_buf))
@@ -33,16 +33,20 @@ int usart_putc(char c)
   return 1;
 }
 
-void usart_write(const char* c, unsigned int length)
+unsigned int usart_write(const char* c, unsigned int length)
 {
+  unsigned int written = 0;
   for (unsigned int i=0; i<length; i++)
-    usart_putc(c[i]);
+    written += usart_putc(c[i]);
+  return written;
 }
 
-void usart_print(const char* c)
+unsigned int usart_print(const char* c)
 {
+  unsigned int written = 0;
   for (const char* i = c; *i != 0; i++)
-    usart_putc(*i);
+    written += usart_putc(*i);
+  return written;
 }
 
 unsigned int usart_readline(char* buffer, unsigned int length)
