@@ -65,33 +65,37 @@ void charge_init(void)
   charge_stop();
 }
 
-// returns temperature in centi-Kelvin
-static unsigned int sample_battery_temp(void)
+static void set_battery_temp_enabled(bool enable)
 {
-  uint16_t sample;
-  uint8_t sequence[1] = {9};
-  gpio_clear(GPIOB, GPIO1);
-  adc_take_sample(1, sequence, &sample);
-  gpio_set(GPIOB, GPIO1);
-  return lookup_temperature(sample);
+  if (enable)
+    gpio_clear(GPIOB, GPIO1);
+  else
+    gpio_set(GPIOB, GPIO1);
 }
 
 // returns whether to terminate the charging process
 static bool charge_update(void)
 {
-  uint8_t sequence[2] = {0, 1};
-  uint16_t sample[2];
-  adc_take_sample(2, sequence, sample);
-  uint32_t bat_i = 3300 * sample[0] / current_sense_gain / current_sense_r / 0x0fff; // in milliamps
-  uint32_t bat_v = 3300 * sample[1] / 0x0fff; // in millivolts
-  LOG("v=%d\n", bat_v);
+  uint8_t sequence[3] = {0, 1, 9};
+  uint16_t sample[3];
+  set_battery_temp_enabled(true);
+  adc_take_sample(3, sequence, sample);
+  set_battery_temp_enabled(false);
+
+  // battery charge current in milliamps
+  uint32_t bat_i = 3300 * sample[0] / current_sense_gain / current_sense_r / 0x0fff;
   LOG("i=%d\n", bat_i);
+
+  // battery voltage in millivolts
+  uint32_t bat_v = 3300 * sample[1] / 0x0fff;
+  LOG("v=%d\n", bat_v);
 
   // check battery voltage termination condition
   if (bat_v > cell_v * n_cells)
     return true;
 
-  uint32_t bat_temp = sample_battery_temp();
+  // temperature in centi-Kelvin
+  unsigned int bat_temp = lookup_temperature(sample[2]);
   if (bat_temp < 372000 - 20000)
     return true; // sanity check
   if (bat_temp > 372000 + 60000)
