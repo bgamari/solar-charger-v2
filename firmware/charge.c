@@ -29,10 +29,10 @@
 
 const uint32_t cell_v = 1400; // charged cell voltage in millivolts
 const uint32_t n_cells = 6;
-const uint32_t current_sense_r = 1. /  0.1; // current sense resistor in Siemens
-const uint32_t current_sense_gain = 200;
+const uint32_t n_samples =  10; // number of ADC samples to average over
+const uint32_t current_sense_r = 1; //10; // current sense resistor in Siemens
+const uint32_t current_sense_gain = 1; //200;
 const uint32_t voltage_sense_gain = 1000 * (68+22) / 22; // millivolts / volt
-//const uint32_t voltage_sense_gain = 1000;
 const uint32_t trickle_current = 10; // milliamps
 //const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge rate in seconds
 const uint32_t charge_retry_time = 3; // how often to try full charge rate in seconds
@@ -88,7 +88,7 @@ static bool charge_update(void)
   uint8_t sequence[3] = {0, 1, 9};
   uint16_t sample[3];
   set_battery_temp_enabled(true);
-  adc_take_sample(3, sequence, sample);
+  adc_take_samples(n_samples, 3, sequence, sample);
   set_battery_temp_enabled(false);
 
   // battery charge current in milliamps

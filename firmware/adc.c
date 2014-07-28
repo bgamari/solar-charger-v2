@@ -7,12 +7,18 @@
 static uint16_t *buffer = NULL;
 static unsigned int remaining = 0;
 static uint8_t *seq;
+static uint32_t accum;
+static uint32_t n_samples;
 
-void adc_take_sample(unsigned int length, uint8_t *sequence, uint16_t *buf)
+void adc_take_samples(unsigned int samples,
+                      unsigned int length, uint8_t *sequence, uint16_t *buf)
 {
   buffer = buf;
-  remaining = length;
-  seq = sequence+1;
+  remaining = length * samples;
+  n_samples = samples;
+  seq = sequence;
+  accum = 0;
+
   adc_set_regular_sequence(ADC1, 1, sequence);
   adc_disable_scan_mode(ADC1);
   adc_set_sample_time_on_all_channels(ADC1, ADC_SMPR_SMP_48CYC);
@@ -41,12 +47,16 @@ void adc_take_sample(unsigned int length, uint8_t *sequence, uint16_t *buf)
 void adc1_isr(void)
 {
   // also clears IRQ flag
-  *buffer = adc_read_regular(ADC1);
-  buffer++;
+  accum += adc_read_regular(ADC1);
   remaining--;
-  if (remaining > 0) {
-    adc_set_regular_sequence(ADC1, 1, seq);
+  if (remaining == 0) {
+    return;
+  } else if (remaining % n_samples == 0) {
+    *buffer = accum / n_samples;
+    buffer++;
+    accum = 0;
     seq++;
-    adc_start_conversion_regular(ADC1);
+    adc_set_regular_sequence(ADC1, 1, seq);
   }
+  adc_start_conversion_regular(ADC1);
 }
