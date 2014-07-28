@@ -50,18 +50,22 @@ int main(void)
   charge_init();
   leds_set(3);
 
-  charge_start();
+  charge_start(CHARGE);
 
-  for (int i=2; 1; i++) {
+  for (int i=2; i < 8; i++) {
     leds_set(i);
-    delay_ms(20);
+    delay_ms(40);
   }
 
   buttons_init();
 
+  unsigned int i=0;
   while (1) {
     //__asm__("wfi");
+    leds_set(i);
     timeout_poll();
+    i++;
+    delay_ms(40);
   }
 }
 

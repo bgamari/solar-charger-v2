@@ -21,7 +21,8 @@ const uint32_t n_cells = 6;
 const uint32_t current_sense_r = 1. /  0.1; // current sense resistor in Siemens
 const uint32_t current_sense_gain = 200;
 const uint32_t trickle_current = 10; // milliamps
-const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge rate in seconds
+//const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge rate in seconds
+const uint32_t charge_retry_time = 3; // how often to try full charge rate in seconds
 const uint32_t iteration_time = 1; // update charge feedback in seconds
 
 static bool charging = false;
@@ -107,18 +108,10 @@ static bool charge_update(void)
   return false;
 }
 
-void charge_set_rate(enum charge_rate new_rate)
-{
-  if (rate == new_rate)
-    return;
-  last_power = 0;
-  rate = new_rate;
-}
-
 static void retry_charge(void *unused)
 {
   NOT_USED(unused);
-  charge_set_rate(CHARGE);
+  charge_start(CHARGE);
 }
 
 static void charge_iteration(void *unused)
@@ -126,31 +119,36 @@ static void charge_iteration(void *unused)
   NOT_USED(unused);
   usart_print("iterate\n");
   if (charge_update()) {
-    charge_set_rate(TRICKLE);
+    charge_start(TRICKLE);
     timeout_add(&retry_timeout, charge_retry_time * 1000, retry_charge, NULL);
-  } else {
-    timeout_add(&iteration_timeout, iteration_time * 1000, charge_iteration, NULL);
   }
+  timeout_add(&iteration_timeout, iteration_time * 1000, charge_iteration, NULL);
 }
 
-void charge_start(void)
+// Start charging at the given rate
+void charge_start(enum charge_rate new_rate)
 {
-  if (charging)
-    return;
-  charging = true;
-  usart_print("charge start\n");
+  if (rate != new_rate) {
+    last_power = 0;
+    rate = new_rate;
+  }
 
-  rcc_periph_clock_enable(RCC_DAC);
-  rcc_osc_on(HSI);
-  rcc_wait_for_osc_ready(HSI);
-  rcc_periph_clock_enable(RCC_ADC1);
+  if (!charging) {
+    charging = true;
+    usart_print("charge start\n");
 
-  dac_enable(CHANNEL_1);
-  delay_ms(1); // wait for DAC and ADC to come up
-  charge_offset = (1 << 12) - 1;
-  update_charge_offset();
-  set_charge_en();
-  timeout_add(&iteration_timeout, iteration_time, charge_iteration, NULL);
+    rcc_periph_clock_enable(RCC_DAC);
+    rcc_osc_on(HSI);
+    rcc_wait_for_osc_ready(HSI);
+    rcc_periph_clock_enable(RCC_ADC1);
+
+    dac_enable(CHANNEL_1);
+    delay_ms(1); // wait for DAC and ADC to come up
+    charge_offset = (1 << 12) - 1;
+    update_charge_offset();
+    set_charge_en();
+    timeout_add(&iteration_timeout, iteration_time, charge_iteration, NULL);
+  }
 }
 
 void charge_stop(void)
