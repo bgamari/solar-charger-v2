@@ -120,7 +120,8 @@ static void charge_iteration(void *unused)
   usart_print("iterate\n");
   if (charge_update()) {
     charge_start(TRICKLE);
-    timeout_add(&retry_timeout, charge_retry_time * 1000, retry_charge, NULL);
+    if (!timeout_is_scheduled(&retry_timeout))
+      timeout_add(&retry_timeout, charge_retry_time * 1000, retry_charge, NULL);
   }
   timeout_add(&iteration_timeout, iteration_time * 1000, charge_iteration, NULL);
 }

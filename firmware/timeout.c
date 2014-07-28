@@ -50,7 +50,7 @@ void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
 {
   timeout_update_time();
   // make sure it's not already scheduled
-  if (ctx->cb != NULL)
+  if (timeout_is_scheduled(ctx))
     while(1);
   ctx->time.raw = cur_time.raw + millis;
   ctx->cb = cb;
@@ -134,4 +134,9 @@ void timeout_poll()
     p->next = NULL;
     cb(p->cbdata);
   }
+}
+
+bool timeout_is_scheduled(struct timeout_ctx *ctx)
+{
+  return ctx->cb != NULL;
 }

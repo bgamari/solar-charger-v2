@@ -24,4 +24,7 @@ void timeout_init(void);
 void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
                  timeout_cb cb, void *cbdata);
 
+// Is the given timeout currently scheduled?
+bool timeout_is_scheduled(struct timeout_ctx *ctx);
+
 void timeout_poll(void);
