@@ -129,7 +129,7 @@ static void charge_iteration(void *unused)
 // Start charging at the given rate
 void charge_start(enum charge_rate new_rate)
 {
-  if (rate != new_rate) {
+  if (rate != new_rate || !charging) {
     last_power = 0;
     rate = new_rate;
   }
