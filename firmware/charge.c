@@ -31,6 +31,8 @@ const uint32_t cell_v = 1400; // charged cell voltage in millivolts
 const uint32_t n_cells = 6;
 const uint32_t current_sense_r = 1. /  0.1; // current sense resistor in Siemens
 const uint32_t current_sense_gain = 200;
+const uint32_t voltage_sense_gain = 1000 * (68+22) / 22; // millivolts / volt
+//const uint32_t voltage_sense_gain = 1000;
 const uint32_t trickle_current = 10; // milliamps
 //const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge rate in seconds
 const uint32_t charge_retry_time = 3; // how often to try full charge rate in seconds
@@ -94,7 +96,7 @@ static bool charge_update(void)
   LOG("i=%d\n", bat_i);
 
   // battery voltage in millivolts
-  uint32_t bat_v = 3300 * sample[1] / 0x0fff;
+  uint32_t bat_v = 3300 * sample[1] / 0x0fff * voltage_sense_gain / 1000;
   LOG("v=%d\n", bat_v);
 
   // check battery voltage termination condition
