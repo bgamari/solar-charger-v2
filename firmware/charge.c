@@ -1,5 +1,4 @@
 #include <stddef.h>
-#include <stdio.h>
 #include <libopencm3/cm3/nvic.h>
 #include <libopencm3/stm32/dac.h>
 #include <libopencm3/stm32/adc.h>
@@ -38,9 +37,7 @@ static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO15); }
 
 static void update_charge_offset(void)
 {
-  char temp[16];
-  snprintf(temp, 16, "o=%d\n", charge_offset);
-  usart_print(temp);
+  usart_printf("o=%d\n", charge_offset);
   dac_load_data_buffer_single(charge_offset, RIGHT12, CHANNEL_1);
 }
 
@@ -78,6 +75,7 @@ static bool charge_update(void)
   adc_take_sample(2, sequence, sample);
   uint32_t bat_i = 3300 * sample[0] / current_sense_gain / current_sense_r; // in milliamps
   uint32_t bat_v = 3300 * sample[1]; // in millivolts
+  usart_printf("v: %d\n", bat_v);
 
   // check battery voltage termination condition
   if (bat_v > cell_v * n_cells)

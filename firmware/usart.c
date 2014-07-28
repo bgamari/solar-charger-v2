@@ -1,3 +1,6 @@
+#include <stdarg.h>
+#include <stdio.h>
+
 #include <libopencm3/cm3/nvic.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/usart.h>
@@ -39,6 +42,16 @@ unsigned int usart_write(const char* c, unsigned int length)
   for (unsigned int i=0; i<length; i++)
     written += usart_putc(c[i]);
   return written;
+}
+
+unsigned int usart_printf(const char* fmt, ...)
+{
+  char buf[255];
+  va_list va;
+  va_start(va, fmt);
+  int length = vsnprintf(buf, 255, fmt, va);
+  va_end(va);
+  return usart_write(buf, length);
 }
 
 unsigned int usart_print(const char* c)
