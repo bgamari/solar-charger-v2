@@ -77,7 +77,9 @@ void timeout_add(struct timeout_ctx *ctx, unsigned int millis,
 
 void tim4_isr(void)
 {
+  // we lazily find the tail only if necessary
   struct timeout_ctx **pending_tail = NULL;
+
   timeout_update_time();
   if (timer_get_flag(TIM4, TIM_SR_UIF)) {
     timer_clear_flag(TIM4, TIM_SR_UIF);
@@ -86,7 +88,7 @@ void tim4_isr(void)
 
   if (timer_get_flag(TIM4, TIM_SR_CC1IF)) {
     timer_clear_flag(TIM4, TIM_SR_CC1IF);
-    if (!scheduled) {
+    if (scheduled == NULL) {
       timer_disable_irq(TIM4, TIM_DIER_CC1IE);
     } else {
       struct timeout_ctx *p = scheduled;
@@ -107,8 +109,8 @@ void tim4_isr(void)
 
           // add to end of pending list
           p->next = NULL;
-          pending = p;
-          pending_tail = &pending;
+          *pending_tail = p;
+          pending_tail = &p->next;
         } else {
           break;
         }
