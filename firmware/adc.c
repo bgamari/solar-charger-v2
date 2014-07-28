@@ -6,13 +6,15 @@
 
 static uint16_t *buffer = NULL;
 static unsigned int remaining = 0;
+static uint8_t *seq;
 
 void adc_take_sample(unsigned int length, uint8_t *sequence, uint16_t *buf)
 {
   buffer = buf;
   remaining = length;
-  adc_set_regular_sequence(ADC1, length, sequence);
-  adc_enable_scan_mode(ADC1);
+  seq = sequence+1;
+  adc_set_regular_sequence(ADC1, 1, sequence);
+  adc_disable_scan_mode(ADC1);
   adc_set_sample_time_on_all_channels(ADC1, ADC_SMPR_SMP_48CYC);
   adc_set_single_conversion_mode(ADC1);
   ADC_CR2(ADC1) |= ADC_CR2_EOCS;
@@ -42,4 +44,9 @@ void adc1_isr(void)
   *buffer = adc_read_regular(ADC1);
   buffer++;
   remaining--;
+  if (remaining > 0) {
+    adc_set_regular_sequence(ADC1, 1, seq);
+    seq++;
+    adc_start_conversion_regular(ADC1);
+  }
 }
