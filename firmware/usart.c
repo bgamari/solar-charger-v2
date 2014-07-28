@@ -91,7 +91,7 @@ void usart1_isr(void)
   if (usart_get_flag(USART1, USART_SR_TXE)) {
     if (waiting_tx_bytes() > 0) {
       usart_send(USART1, tx_buf[tx_tail]);
-      tx_tail++;
+      tx_tail = (tx_tail + 1) % sizeof(tx_buf);
     } else {
       usart_disable_tx_interrupt(USART1);
     }
