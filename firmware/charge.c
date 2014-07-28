@@ -13,6 +13,15 @@
 #include "timeout.h"
 #include "thermistor.h"
 
+// enable debug output to serial console
+#define DEBUG
+
+#ifdef DEBUG
+#define LOG(fmt, ...) usart_printf(fmt, __VA_ARGS__)
+#else
+#define LOG(fmt, ...)
+#endif
+
 #define NOT_USED(x) ( (void)(x) )
 
 const uint32_t cell_v = 1400; // charged cell voltage in millivolts
@@ -37,7 +46,7 @@ static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO15); }
 
 static void update_charge_offset(void)
 {
-  usart_printf("o=%d\n", charge_offset);
+  LOG("o=%d\n", charge_offset);
   dac_load_data_buffer_single(charge_offset, RIGHT12, CHANNEL_1);
 }
 
@@ -75,7 +84,8 @@ static bool charge_update(void)
   adc_take_sample(2, sequence, sample);
   uint32_t bat_i = 3300 * sample[0] / current_sense_gain / current_sense_r / 0x0fff; // in milliamps
   uint32_t bat_v = 3300 * sample[1] / 0x0fff; // in millivolts
-  usart_printf("v: %d\n", bat_v);
+  LOG("v=%d\n", bat_v);
+  LOG("i=%d\n", bat_i);
 
   // check battery voltage termination condition
   if (bat_v > cell_v * n_cells)
