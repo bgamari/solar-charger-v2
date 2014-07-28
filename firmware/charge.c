@@ -38,7 +38,7 @@ const uint32_t iteration_time = 500; // update charge feedback in milliseconds
 
 static bool charging = false;
 static enum charge_rate rate = CHARGE;
-static uint16_t charge_offset;
+static int charge_offset = 0;
 static uint32_t last_power = 0; // for MPPT
 static uint32_t perturbation = 10; // codepoints
 
@@ -49,8 +49,12 @@ static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO15); }
 
 static void update_charge_offset(void)
 {
-  LOG("o=%d\n", charge_offset);
+  if (charge_offset > 0x0fff)
+    charge_offset = 0x0fff;
+  else if (charge_offset < 0)
+    charge_offset = 0;
   dac_load_data_buffer_single(charge_offset, RIGHT12, CHANNEL_1);
+  LOG("o=%d\n", charge_offset);
 }
 
 void charge_init(void)
