@@ -23,7 +23,7 @@ const uint32_t current_sense_gain = 200;
 const uint32_t trickle_current = 10; // milliamps
 //const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge rate in seconds
 const uint32_t charge_retry_time = 3; // how often to try full charge rate in seconds
-const uint32_t iteration_time = 1; // update charge feedback in seconds
+const uint32_t iteration_time = 500; // update charge feedback in milliseconds
 
 static bool charging = false;
 static enum charge_rate rate = CHARGE;
@@ -123,7 +123,7 @@ static void charge_iteration(void *unused)
     if (!timeout_is_scheduled(&retry_timeout))
       timeout_add(&retry_timeout, charge_retry_time * 1000, retry_charge, NULL);
   }
-  timeout_add(&iteration_timeout, iteration_time * 1000, charge_iteration, NULL);
+  timeout_add(&iteration_timeout, iteration_time, charge_iteration, NULL);
 }
 
 // Start charging at the given rate
