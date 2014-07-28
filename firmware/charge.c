@@ -13,6 +13,9 @@
 #include "timeout.h"
 #include "thermistor.h"
 
+// disable battery temperature logic
+#define DISABLE_BATTERY_TEMP
+
 // enable debug output to serial console
 #define DEBUG
 
@@ -94,12 +97,14 @@ static bool charge_update(void)
   if (bat_v > cell_v * n_cells)
     return true;
 
+#ifndef DISABLE_BATTERY_TEMP
   // temperature in centi-Kelvin
   unsigned int bat_temp = lookup_temperature(sample[2]);
   if (bat_temp < 372000 - 20000)
     return true; // sanity check
   if (bat_temp > 372000 + 60000)
     return true;
+#endif
 
   if (rate == CHARGE) {
     // Perturb and observe maximum power-point tracking
