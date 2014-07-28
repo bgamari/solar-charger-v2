@@ -73,8 +73,8 @@ static bool charge_update(void)
   uint8_t sequence[2] = {0, 1};
   uint16_t sample[2];
   adc_take_sample(2, sequence, sample);
-  uint32_t bat_i = 3300 * sample[0] / current_sense_gain / current_sense_r; // in milliamps
-  uint32_t bat_v = 3300 * sample[1]; // in millivolts
+  uint32_t bat_i = 3300 * sample[0] / current_sense_gain / current_sense_r / 0x0fff; // in milliamps
+  uint32_t bat_v = 3300 * sample[1] / 0x0fff; // in millivolts
   usart_printf("v: %d\n", bat_v);
 
   // check battery voltage termination condition
