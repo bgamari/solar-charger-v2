@@ -30,7 +30,7 @@
 const uint32_t cell_v = 1400; // charged cell voltage in millivolts
 const uint32_t n_cells = 6;
 const uint32_t n_samples =  10; // number of ADC samples to average over
-const uint32_t current_sense_r = 3; // current sense resistor in Siemens
+const uint32_t current_sense_r = 25; // current sense resistor in Siemens
 const uint32_t current_sense_gain = 200; // gain of current sense amplifier
 const uint32_t voltage_sense_gain = 1000 * (68+22) / 22; // millivolts / volt
 const uint32_t trickle_current = 10; // milliamps
