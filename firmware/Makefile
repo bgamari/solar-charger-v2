@@ -93,3 +93,6 @@ thermistor-lut.c : Thermistor.hs
 	runghc $<
 
 thermistor.o : thermistor-lut.c
+
+console :
+	picocom /dev/ttyUSB0 -b115200 --imap lfcrlf
