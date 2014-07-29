@@ -95,4 +95,7 @@ thermistor-lut.c : Thermistor.hs
 thermistor.o : thermistor-lut.c
 
 console :
-	picocom /dev/ttyUSB0 -b115200 --imap lfcrlf
+	picocom /dev/ttyUSB0 -b9600 --imap lfcrlf
+
+log-console :
+	cat /dev/ttyUSB0 | tee console.log
