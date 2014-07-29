@@ -93,11 +93,11 @@ static bool charge_update(void)
 
   // battery charge current in milliamps
   uint32_t bat_i = 3300 * sample[0] / 0x0fff * current_sense_r / current_sense_gain;
-  LOG("i=%d\n", bat_i);
+  LOG("pv_i=%d\n", bat_i);
 
   // battery voltage in millivolts
   uint32_t bat_v = 3300 * sample[1] / 0x0fff * voltage_sense_gain / 1000;
-  LOG("v=%d\n", bat_v);
+  LOG("bat_v=%d\n", bat_v);
 
   // check battery voltage termination condition
   if (bat_v > cell_v * n_cells)
@@ -114,12 +114,13 @@ static bool charge_update(void)
 
 #if 1
   uint32_t power = bat_i * bat_v / 1000; // in milliwatts
+  LOG("power=%d\n", power);
   if (rate == CHARGE && power < 5) {
     // The output voltage is too low
     charge_offset -= perturbation;
   } else if (rate == CHARGE) {
     // Perturb and observe maximum power-point tracking
-    LOG("mode=charge power=%d\n", power);
+    LOG("mode=charge %d\n", perturbation);
     if (power < last_power)
       perturbation *= -1;
     charge_offset += perturbation;
