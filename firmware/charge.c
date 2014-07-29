@@ -30,7 +30,7 @@
 const uint32_t cell_v = 1400; // charged cell voltage in millivolts
 const uint32_t n_cells = 6;
 const uint32_t n_samples =  10; // number of ADC samples to average over
-const uint32_t current_sense_r = 10; // current sense resistor in Siemens
+const uint32_t current_sense_r = 3; // current sense resistor in Siemens
 const uint32_t current_sense_gain = 200; // gain of current sense amplifier
 const uint32_t voltage_sense_gain = 1000 * (68+22) / 22; // millivolts / volt
 const uint32_t trickle_current = 10; // milliamps
@@ -112,21 +112,30 @@ static bool charge_update(void)
     return true;
 #endif
 
-  if (rate == CHARGE) {
+#if 1
+  uint32_t power = bat_i * bat_v / 1000; // in milliwatts
+  if (rate == CHARGE && power < 5) {
+    // The output voltage is too low
+    charge_offset -= perturbation;
+  } else if (rate == CHARGE) {
     // Perturb and observe maximum power-point tracking
-    uint32_t power = bat_i * bat_v / 1000; // in milliwatts
+    LOG("mode=charge power=%d\n", power);
     if (power < last_power)
       perturbation *= -1;
     charge_offset += perturbation;
     last_power = power;
 
   } else if (rate == TRICKLE) {
+    LOG("mode=trickle setpoint=%d\n", trickle_current);
     // Track trickle current
     if (bat_i > trickle_current)
       charge_offset++;
     else
       charge_offset--;
   }
+#else
+  charge_offset = (charge_offset + 100) % 0x0fff;
+#endif
   update_charge_offset();
   return false;
 }
