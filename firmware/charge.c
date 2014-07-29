@@ -178,7 +178,7 @@ void charge_start(enum charge_rate new_rate)
 
     dac_enable(CHANNEL_1);
     delay_ms(1); // wait for DAC and ADC to come up
-    charge_offset = (1 << 12) - 1;
+    charge_offset = 1000; // this seems to be a reasonable initial value
     update_charge_offset();
     set_charge_en();
     timeout_add(&iteration_timeout, iteration_time, charge_iteration, NULL);
