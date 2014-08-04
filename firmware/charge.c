@@ -91,8 +91,8 @@ static bool charge_update(void)
   adc_take_samples(n_samples, 3, sequence, sample);
   set_battery_temp_enabled(false);
 
-  // battery charge current in milliamps
-  uint32_t bat_i = 3300 * sample[0] / 0x0fff * current_sense_r / current_sense_gain;
+  // battery charge current in microamps
+  uint32_t bat_i = 3300 * sample[0] / 0x0fff * 1000 * current_sense_r / current_sense_gain;
   LOG("pv_i=%d\n", bat_i);
 
   // battery voltage in millivolts
@@ -113,7 +113,7 @@ static bool charge_update(void)
 #endif
 
 #if 1
-  uint32_t power = bat_i * bat_v / 1000; // in milliwatts
+  uint32_t power = bat_i * bat_v / 1000 / 1000; // in milliwatts
   LOG("power=%d\n", power);
   if (rate == CHARGE && power < 5) {
     // The output voltage is too low
