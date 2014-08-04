@@ -37,6 +37,7 @@ const uint32_t trickle_current = 10; // milliamps
 //const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge rate in seconds
 const uint32_t charge_retry_time = 3; // how often to try full charge rate in seconds
 const uint32_t iteration_time = 500; // update charge feedback in milliseconds
+
 const uint32_t power_thresh = 50; // low charge power threshold (mW)
 
 static bool charging = false;
@@ -49,6 +50,25 @@ static struct timeout_ctx retry_timeout, iteration_timeout;
 
 static void set_charge_en(void) { gpio_set(GPIOB, GPIO15); }
 static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO15); }
+
+// Output voltage of charging regulator at given offset (in millivolts)
+static uint32_t charge_offset_to_voltage(uint16_t offset)
+{
+  uint32_t v_fb = 2500;
+  int32_t a_inv = 5; // (R2 + R6) / R6
+  uint32_t v_dac = (v_fb * (uint32_t) offset) / 0x0fff;
+  return v_fb * a_inv + v_dac * (1 - a_inv);
+}
+
+// Offset DAC value to produce given charge voltage (in millivolts)
+static uint16_t charge_voltage_to_offset(uint32_t v)
+{
+  uint32_t v_fb = 2500;
+  int32_t a_inv = 5; // (R2 + R6) / R6
+  uint32_t v_dac = v - v_fb * a_inv / (1 - a_inv);
+  uint16_t codepoint = v_dac * 0x0fff / v_fb;
+  return codepoint;
+}
 
 static void update_charge_offset(void)
 {
@@ -118,7 +138,7 @@ static bool charge_update(void)
   LOG("power=%d mW\n", power);
   if (rate == CHARGE && power < power_thresh) {
     // The output voltage is too low so we aren't charging
-    charge_offset -= perturbation;
+    charge_offset = charge_voltage_to_offset(bat_v);
   } else if (rate == CHARGE) {
     // Perturb and observe maximum power-point tracking
     LOG("mode=charge %d\n", perturbation);
