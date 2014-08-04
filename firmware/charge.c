@@ -57,15 +57,6 @@ static struct timeout_ctx retry_timeout, iteration_timeout;
 static void set_charge_en(void) { gpio_set(GPIOB, GPIO15); }
 static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO15); }
 
-// Output voltage of charging regulator at given offset (in millivolts)
-static uint32_t charge_offset_to_voltage(uint16_t offset)
-{
-  uint32_t v_fb = 2500;
-  int32_t a_inv = 5; // (R2 + R6) / R6
-  uint32_t v_dac = (v_fb * (uint32_t) offset) / 0x0fff;
-  return v_fb * a_inv + v_dac * (1 - a_inv);
-}
-
 // Offset DAC value to produce given charge voltage (in millivolts)
 static uint16_t charge_voltage_to_offset(uint32_t v)
 {
