@@ -48,7 +48,8 @@ const uint32_t perturbation = 5; // codepoints
 // Charge algorithm state
 static bool charging = false;
 static enum charge_rate rate = CHARGE;
-static int charge_offset = 0;
+static int charge_offset = 0; // charge voltage offset (DAC codepoint)
+                              // negative is higher voltage
 static uint32_t last_power = 0; // for MPPT
 
 static struct timeout_ctx retry_timeout, iteration_timeout;
@@ -142,8 +143,11 @@ static bool charge_update(void)
   uint32_t power = bat_i * bat_v / 1000 / 1000; // in milliwatts
   LOG("power=%d mW\n", power);
   if (rate == CHARGE && power < power_thresh) {
-    // The output voltage is too low so we aren't charging
+    // The output voltage is too low so we aren't charging.
+    // Reset charge voltage offset to current battery voltage
     charge_offset = charge_voltage_to_offset(bat_v);
+    if (perturbation > 0)
+      perturbation = -perturbation;
   } else if (rate == CHARGE) {
     // Perturb and observe maximum power-point tracking
     LOG("mode=charge %d\n", perturbation);
