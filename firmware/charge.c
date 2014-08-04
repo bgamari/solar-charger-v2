@@ -27,24 +27,29 @@
 
 #define NOT_USED(x) ( (void)(x) )
 
+// Battery properties
 const uint32_t cell_v = 1400; // charged cell voltage in millivolts
 const uint32_t n_cells = 6;
-const uint32_t n_samples =  10; // number of ADC samples to average over
+
+// Sensor properties
+const uint32_t n_samples = 10; // number of ADC samples to average over
 const uint32_t current_sense_r = 25; // current sense resistor in Siemens
 const uint32_t current_sense_gain = 200; // gain of current sense amplifier
 const uint32_t voltage_sense_gain = 1000 * (68+22) / 22; // millivolts / volt
+
+// Charge parameters
 const uint32_t trickle_current = 10; // milliamps
 //const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge rate in seconds
 const uint32_t charge_retry_time = 3; // how often to try full charge rate in seconds
 const uint32_t iteration_time = 500; // update charge feedback in milliseconds
+const uint32_t power_thresh = 50; // low charge power reset threshold (mW)
+const uint32_t perturbation = 5; // codepoints
 
-const uint32_t power_thresh = 50; // low charge power threshold (mW)
-
+// Charge algorithm state
 static bool charging = false;
 static enum charge_rate rate = CHARGE;
 static int charge_offset = 0;
 static uint32_t last_power = 0; // for MPPT
-static uint32_t perturbation = 5; // codepoints
 
 static struct timeout_ctx retry_timeout, iteration_timeout;
 
