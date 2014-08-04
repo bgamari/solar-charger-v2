@@ -13,6 +13,8 @@
 #include <string.h>
 #include <libopencm3/stm32/timer.h>
 
+#define DEBUG
+
 int buttons_init(void)
 {
   exti_select_source(EXTI1, GPIOH); // Button 1
@@ -27,8 +29,10 @@ int buttons_init(void)
 
 int main(void)
 {
-  //const clock_scale_t* clk = &clock_config[CLOCK_VRANGE1_MSI_RAW_2MHZ];
-  //rcc_clock_setup_msi(clk);
+#ifndef DEBUG
+  const clock_scale_t* clk = &clock_config[CLOCK_VRANGE1_MSI_RAW_2MHZ];
+  rcc_clock_setup_msi(clk);
+#endif
 
   //PWR_CR = (PWR_CR & ~(0x7 << 5)) | (0x6 << 5) | PWR_CR_PVDE; // PVD = 3.1V
   //exti_enable_request(EXTI16); // PVD interrupt
@@ -58,14 +62,15 @@ int main(void)
   }
 
   buttons_init();
+  leds_set(0);
 
-  unsigned int i=0;
   while (1) {
-    //__asm__("wfi");
-    leds_set(i);
-    timeout_poll();
-    i++;
+#ifdef DEBUG
     delay_ms(40);
+#else
+    __asm__("wfi");
+#endif
+    timeout_poll();
   }
 }
 
