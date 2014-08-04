@@ -43,7 +43,6 @@ const uint32_t trickle_current = 10; // milliamps
 const uint32_t charge_retry_time = 3; // how often to try full charge rate in seconds
 const uint32_t iteration_time = 500; // update charge feedback in milliseconds
 const uint32_t power_thresh = 50; // low charge power reset threshold (mW)
-const uint32_t perturbation = 5; // codepoints
 
 // Charge algorithm state
 static bool charging = false;
@@ -51,6 +50,7 @@ static enum charge_rate rate = CHARGE;
 static int charge_offset = 0; // charge voltage offset (DAC codepoint)
                               // negative is higher voltage
 static uint32_t last_power = 0; // for MPPT
+static uint32_t perturbation = 5; // DAC codepoints
 
 static struct timeout_ctx retry_timeout, iteration_timeout;
 
