@@ -44,7 +44,7 @@ static bool charging = false;
 static enum charge_rate rate = CHARGE;
 static int charge_offset = 0;
 static uint32_t last_power = 0; // for MPPT
-static uint32_t perturbation = 10; // codepoints
+static uint32_t perturbation = 5; // codepoints
 
 static struct timeout_ctx retry_timeout, iteration_timeout;
 
