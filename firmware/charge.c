@@ -37,6 +37,7 @@ const uint32_t trickle_current = 10; // milliamps
 //const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge rate in seconds
 const uint32_t charge_retry_time = 3; // how often to try full charge rate in seconds
 const uint32_t iteration_time = 500; // update charge feedback in milliseconds
+const uint32_t power_thresh = 50; // low charge power threshold (mW)
 
 static bool charging = false;
 static enum charge_rate rate = CHARGE;
@@ -115,8 +116,8 @@ static bool charge_update(void)
 #if 1
   uint32_t power = bat_i * bat_v / 1000 / 1000; // in milliwatts
   LOG("power=%d\n", power);
-  if (rate == CHARGE && power < 5) {
-    // The output voltage is too low
+  if (rate == CHARGE && power < power_thresh) {
+    // The output voltage is too low so we aren't charging
     charge_offset -= perturbation;
   } else if (rate == CHARGE) {
     // Perturb and observe maximum power-point tracking
