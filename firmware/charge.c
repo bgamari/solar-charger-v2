@@ -58,6 +58,12 @@ static int charge_offset = 0; // charge voltage offset (DAC codepoint)
 static uint32_t last_power = 0; // for MPPT
 static uint32_t perturbation = 5; // DAC codepoints
 
+// Sample cache
+uint32_t bat_i = 0; // battery charge current (uA)
+uint32_t bat_v = 0; // battery voltage (mV)
+uint32_t bat_temp = 0; // battery temperature (centi-Kelvin)
+uint32_t input_v = 0; // charger input voltage (mV)
+
 static struct timeout_ctx retry_timeout, iteration_timeout;
 
 static void set_charge_en(void) { gpio_set(GPIOB, GPIO15); }
@@ -106,8 +112,8 @@ static void set_battery_temp_enabled(bool enable)
     gpio_set(GPIOB, GPIO1);
 }
 
-// returns whether to terminate the charging process
-static bool charge_update(void)
+// update the sensor values
+static void charge_update(void)
 {
   uint8_t sequence[4] = { IBAT_CH, VBAT_CH,
                           TEMP_CH, VIN_CH };
@@ -117,24 +123,29 @@ static bool charge_update(void)
   set_battery_temp_enabled(false);
 
   // battery charge current in microamps
-  uint32_t bat_i = 3300 * sample[0] / 0x0fff * 1000 * ibat_sense_r / ibat_sense_gain;
+  bat_i = 3300 * sample[0] / 0x0fff * 1000 * ibat_sense_r / ibat_sense_gain;
   LOG("pv_i=%d mA\n", bat_i / 1000);
 
   // battery voltage in millivolts
-  uint32_t bat_v = 3300 * sample[1] / 0x0fff * vbat_sense_gain / 1000;
+  bat_v = 3300 * sample[1] / 0x0fff * vbat_sense_gain / 1000;
   LOG("bat_v=%d mV\n", bat_v);
 
   // charger input voltage in millivolts
-  uint32_t input_v = 3300 * sample[3] / 0x0fff * vin_sense_gain / 1000;
+  input_v = 3300 * sample[3] / 0x0fff * vin_sense_gain / 1000;
   LOG("in_v=%d mV\n", input_v);
 
+  // temperature in centi-Kelvin
+  bat_temp = lookup_temperature(sample[2]);
+}
+
+// returns whether to terminate the charging process
+static bool charge_feedback(void)
+{
   // check battery voltage termination condition
   if (bat_v > cell_v * n_cells)
     return true;
 
 #ifndef DISABLE_BATTERY_TEMP
-  // temperature in centi-Kelvin
-  unsigned int bat_temp = lookup_temperature(sample[2]);
   if (bat_temp < 372000 - 20000)
     return true; // sanity check
   if (bat_temp > 372000 + 60000)
@@ -183,7 +194,8 @@ static void charge_iteration(void *unused)
 {
   NOT_USED(unused);
   usart_print("iterate\n");
-  if (charge_update()) {
+  charge_update();
+  if (charge_feedback()) {
     charge_start(TRICKLE);
     if (!timeout_is_scheduled(&retry_timeout))
       timeout_add(&retry_timeout, charge_retry_time * 1000, retry_charge, NULL);
