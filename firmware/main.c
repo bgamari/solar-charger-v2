@@ -8,6 +8,7 @@
 #include "charge.h"
 #include "leds.h"
 #include "timeout.h"
+#include "util.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -52,7 +53,7 @@ int main(void)
   usart_print("hello world\n");
 
   charge_init();
-  leds_set(3);
+  leds_set(2);
 
   charge_start(CHARGE);
 
@@ -74,7 +75,26 @@ int main(void)
   }
 }
 
-void button1_pressed(void) { }
+static void clear_leds(void *unused) {
+  NOT_USED(unused);
+  leds_set(0);
+}
+
+void button1_pressed(void)
+{
+  static struct timeout_ctx timeout;
+  if (bat_i < 20)
+    leds_set(0);
+  else if (bat_i < 40)
+    leds_set(1);
+  else if (bat_i < 60)
+    leds_set(3);
+  else
+    leds_set(7);
+  if (!timeout_is_scheduled(&timeout))
+    timeout_add(&timeout, 2000, clear_leds, NULL);
+}
+
 void button2_pressed(void) { }
 
 void pvd_isr(void)
