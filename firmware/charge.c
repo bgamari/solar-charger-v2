@@ -33,9 +33,10 @@ const uint32_t n_cells = 6;
 
 // Sensor properties
 const uint32_t n_samples = 10; // number of ADC samples to average over
-const uint32_t current_sense_r = 25; // current sense resistor in Siemens
-const uint32_t current_sense_gain = 200; // gain of current sense amplifier
-const uint32_t voltage_sense_gain = 1000 * (68+22) / 22; // millivolts / volt
+const uint32_t ibat_sense_r = 25; // current sense resistor in Siemens
+const uint32_t ibat_sense_gain = 200; // gain of current sense amplifier
+const uint32_t vbat_sense_gain = 1000 * (68+22) / 22; // millivolts / volt
+const uint32_t vin_sense_gain = 1000 * (66+10) / 10; // millivolts / volt
 
 // Charge parameters
 const uint32_t trickle_current = 10; // milliamps
@@ -43,6 +44,12 @@ const uint32_t trickle_current = 10; // milliamps
 const uint32_t charge_retry_time = 3; // how often to try full charge rate in seconds
 const uint32_t iteration_time = 500; // update charge feedback in milliseconds
 const uint32_t power_thresh = 50; // low charge power reset threshold (mW)
+
+// ADC channel assignments
+#define IBAT_CH 0
+#define VBAT_CH 1
+#define TEMP_CH 9
+#define VIN_CH  5
 
 // Charge algorithm state
 static bool charging = false;
@@ -103,19 +110,24 @@ static void set_battery_temp_enabled(bool enable)
 // returns whether to terminate the charging process
 static bool charge_update(void)
 {
-  uint8_t sequence[3] = {0, 1, 9};
-  uint16_t sample[3];
+  uint8_t sequence[4] = { IBAT_CH, VBAT_CH,
+                          TEMP_CH, VIN_CH };
+  uint16_t sample[4];
   set_battery_temp_enabled(true);
-  adc_take_samples(n_samples, 3, sequence, sample);
+  adc_take_samples(n_samples, 4, sequence, sample);
   set_battery_temp_enabled(false);
 
   // battery charge current in microamps
-  uint32_t bat_i = 3300 * sample[0] / 0x0fff * 1000 * current_sense_r / current_sense_gain;
+  uint32_t bat_i = 3300 * sample[0] / 0x0fff * 1000 * ibat_sense_r / ibat_sense_gain;
   LOG("pv_i=%d mA\n", bat_i / 1000);
 
   // battery voltage in millivolts
-  uint32_t bat_v = 3300 * sample[1] / 0x0fff * voltage_sense_gain / 1000;
+  uint32_t bat_v = 3300 * sample[1] / 0x0fff * vbat_sense_gain / 1000;
   LOG("bat_v=%d mV\n", bat_v);
+
+  // charger input voltage in millivolts
+  uint32_t input_v = 3300 * sample[3] / 0x0fff * vin_sense_gain / 1000;
+  LOG("in_v=%d mV\n", input_v);
 
   // check battery voltage termination condition
   if (bat_v > cell_v * n_cells)
