@@ -72,8 +72,8 @@ static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO15); }
 static uint16_t charge_voltage_to_offset(uint32_t v)
 {
   uint32_t v_fb = 2500;
-  int32_t a_inv = 5; // (R2 + R6) / R6
-  uint32_t v_dac = v - v_fb * a_inv / (1 - a_inv);
+  int32_t a_inv = 5545; // 1000 * (R2 + R6) / R6
+  uint32_t v_dac = v - v_fb * a_inv / (1 - a_inv) / 1000; // millivolts
   uint16_t codepoint = v_dac * 0x0fff / v_fb;
   return codepoint;
 }
