@@ -12,6 +12,7 @@
 #include "adc.h"
 #include "timeout.h"
 #include "thermistor.h"
+#include "util.h"
 
 // disable battery temperature logic
 #define DISABLE_BATTERY_TEMP
@@ -24,8 +25,6 @@
 #else
 #define LOG(fmt, ...)
 #endif
-
-#define NOT_USED(x) ( (void)(x) )
 
 // Battery properties
 const uint32_t cell_v = 1400; // charged cell voltage in millivolts
