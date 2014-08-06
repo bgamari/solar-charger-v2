@@ -5,9 +5,15 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/usart.h>
 #include <libopencm3/stm32/rcc.h>
-#include "usart.h"
 
-on_line_recv_cb on_line_recv;
+#include "usart.h"
+#include "util.h"
+
+static void dummy_on_line_recv(const char* c, unsigned int length) {
+  NOT_USED(c); NOT_USED(length);
+}
+
+on_line_recv_cb on_line_recv = dummy_on_line_recv;
 
 char rx_buf[255];
 unsigned int rx_head = 0;
