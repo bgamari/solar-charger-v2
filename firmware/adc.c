@@ -49,14 +49,14 @@ void adc1_isr(void)
   // also clears IRQ flag
   accum += adc_read_regular(ADC1);
   remaining--;
-  if (remaining == 0) {
-    return;
-  } else if (remaining % n_samples == 0) {
+  if (remaining % n_samples == 0) {
     *buffer = accum / n_samples;
     buffer++;
     accum = 0;
     seq++;
     adc_set_regular_sequence(ADC1, 1, seq);
   }
+  if (remaining == 0)
+    return;
   adc_start_conversion_regular(ADC1);
 }
