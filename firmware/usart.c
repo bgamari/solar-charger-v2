@@ -13,7 +13,7 @@ static void dummy_on_line_recv(const char* c, unsigned int length) {
   NOT_USED(c); NOT_USED(length);
 }
 
-on_line_recv_cb on_line_recv = dummy_on_line_recv;
+on_line_recv_cb usart_on_line_recv = dummy_on_line_recv;
 
 char rx_buf[255];
 unsigned int rx_head = 0;
@@ -103,11 +103,11 @@ void usart1_isr(void)
     char c = usart_recv(USART1);
     if (c == '\n') {
       rx_buf[rx_head] = 0;
-      on_line_recv(rx_buf, rx_head);
+      usart_on_line_recv(rx_buf, rx_head);
       rx_head = 0;
     } else {
       rx_buf[rx_head] = c;
-      rx_head++;
+      rx_head = (rx_head + 1) % sizeof(rx_buf);
     }
   }
 
