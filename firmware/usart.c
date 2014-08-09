@@ -15,10 +15,10 @@ static void dummy_on_line_recv(const char* c, unsigned int length) {
 
 on_line_recv_cb usart_on_line_recv = dummy_on_line_recv;
 
-char rx_buf[255];
+char rx_buf[255] = {};
 unsigned int rx_head = 0;
 
-char tx_buf[255];
+char tx_buf[255] = {};
 unsigned int tx_head = 0; // write in position
 unsigned int tx_tail = 0; // read out position
 
@@ -102,8 +102,10 @@ void usart1_isr(void)
   if (usart_get_flag(USART1, USART_SR_RXNE)) {
     char c = usart_recv(USART1);
     if (c == '\n') {
-      rx_buf[rx_head] = 0;
-      usart_on_line_recv(rx_buf, rx_head);
+      if (rx_head > 0) {
+        rx_buf[rx_head] = 0;
+        usart_on_line_recv(rx_buf, rx_head);
+      }
       rx_head = 0;
     } else {
       rx_buf[rx_head] = c;
