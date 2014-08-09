@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include <libopencm3/cm3/nvic.h>
+#include <libopencm3/cm3/cortex.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/usart.h>
 #include <libopencm3/stm32/rcc.h>
@@ -32,12 +33,16 @@ static unsigned int waiting_tx_bytes(void)
 
 unsigned int usart_putc(char c)
 {
+  cm_disable_interrupts();
   unsigned int next = (tx_head + 1) % sizeof(tx_buf);
-  if (waiting_tx_bytes() == sizeof(tx_buf))
+  if (waiting_tx_bytes() == sizeof(tx_buf)) {
+    cm_enable_interrupts();
     return 0;
+  }
 
   tx_buf[tx_head] = c;
   tx_head = next;
+  cm_enable_interrupts();
   usart_enable_tx_interrupt(USART1);
   return 1;
 }
