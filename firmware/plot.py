@@ -2,9 +2,10 @@
 
 import matplotlib.pyplot as pl
 import numpy as np
+import sys
 
 data = {}
-for l in open('log'):
+for l in open(sys.argv[1]):
     k,_,v = l.partition('=')
     if v is '':
         continue
