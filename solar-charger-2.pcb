@@ -1231,7 +1231,7 @@ Element["found,onsolder" "0603" "C19" "1u" 2770.00mil 970.00mil -115.00mil 0.476
 
 	)
 
-Element["found" "0603" "R8" "22k" 1900.00mil 1200.00mil -10.00mil -2.7620mm 0 76 ""]
+Element["found" "0603" "R8" "10k" 1900.00mil 1200.00mil -10.00mil -2.7620mm 0 76 ""]
 (
 	Pad[-0.0500mm -0.7500mm 0.0500mm -0.7500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "square"]
 	Pad[-0.0500mm 0.7500mm 0.0500mm 0.7500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "square"]
@@ -1264,7 +1264,7 @@ Element["" "0603" "R4" "10k" 2000.00mil 1300.00mil 60.00mil -0.4760mm 0 77 ""]
 
 	)
 
-Element["" "0603" "R3" "120k" 2000.00mil 1200.00mil -50.00mil -1.7460mm 0 77 ""]
+Element["" "0603" "R3" "56k" 2000.00mil 1200.00mil -50.00mil -1.7460mm 0 77 ""]
 (
 	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "square"]
 	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "square"]

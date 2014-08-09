@@ -130,7 +130,7 @@ refdes=R3
 T 57300 29800 5 10 0 1 270 0 1
 footprint=0603
 T 57500 29600 5 10 1 1 0 0 1
-value=120k
+value=56k
 }
 N 59500 30600 58200 30600 4
 C 58300 28700 1 90 0 resistor-1.sym
@@ -142,7 +142,7 @@ refdes=R8
 T 58300 28700 5 10 0 1 0 0 1
 footprint=0603
 T 58000 29100 5 10 1 1 180 0 1
-value=22k
+value=10k
 }
 C 58100 28400 1 0 0 gnd-1.sym
 C 58700 30200 1 270 0 capacitor-1.sym
