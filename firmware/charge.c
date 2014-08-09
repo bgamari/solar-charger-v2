@@ -155,7 +155,8 @@ static bool charge_feedback(void)
 #if 1
   uint32_t power = bat_i * bat_v / 1000 / 1000; // in milliwatts
   LOG("power=%d mW\n", power);
-  if (rate == CHARGE && power < power_thresh) {
+  if (rate == MANUAL) {
+  } else if (rate == CHARGE && power < power_thresh) {
     // The output voltage is too low so we aren't charging.
     // Reset charge voltage offset to current battery voltage
     charge_offset = charge_voltage_to_offset(bat_v + 200);
@@ -241,4 +242,11 @@ void charge_stop(void)
   dac_disable(CHANNEL_1);
   rcc_periph_clock_disable(RCC_DAC);
   rcc_periph_clock_disable(RCC_ADC1);
+}
+
+void set_charge_offset(uint16_t o)
+{
+  if (rate != MANUAL)
+    return;
+  charge_offset = o;
 }

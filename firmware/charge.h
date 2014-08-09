@@ -3,6 +3,7 @@
 enum charge_rate {
   TRICKLE, // trickle charge
   CHARGE,  // maximum power-point tracking
+  MANUAL,  // manual charge point control
 };
 
 // Cached sensor values (read-only)
@@ -16,3 +17,5 @@ void charge_init(void);
 void charge_start(enum charge_rate rate);
 void charge_stop(void);
 
+
+void set_charge_offset(uint16_t o);
