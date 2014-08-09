@@ -158,7 +158,7 @@ static bool charge_feedback(void)
     // The output voltage is too low so we aren't charging.
     // Reset charge voltage offset to current battery voltage
     charge_offset = charge_voltage_to_offset(bat_v);
-    LOG("reset offset to %d", charge_offset);
+    LOG("reset offset to %d\n", charge_offset);
     if (perturbation > 0)
       perturbation = -perturbation;
   } else if (rate == CHARGE) {
