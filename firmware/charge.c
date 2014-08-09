@@ -65,8 +65,8 @@ uint32_t input_v = 0; // charger input voltage (mV)
 
 static struct timeout_ctx retry_timeout, iteration_timeout;
 
-static void set_charge_en(void) { gpio_set(GPIOB, GPIO15); }
-static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO15); }
+static void set_charge_en(void) { gpio_set(GPIOB, GPIO12); }
+static void clear_charge_en(void) { gpio_clear(GPIOB, GPIO12); }
 
 // Offset DAC value to produce given charge voltage (in millivolts)
 static uint16_t charge_voltage_to_offset(uint32_t v)
