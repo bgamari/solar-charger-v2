@@ -73,19 +73,6 @@ unsigned int usart_print(const char* c)
   return written;
 }
 
-unsigned int usart_readline(char* buffer, unsigned int length)
-{
-  unsigned int i;
-  for (i=0; i < length; i++) {
-    usart_wait_recv_ready(USART1);
-    buffer[i] = usart_recv(USART1);
-    if (buffer[i] == '\n')
-      break;
-  }
-  buffer[i] = 0;
-  return i;
-}
-
 void usart_init(void)
 {
   gpio_set_af(GPIOA, GPIO_AF7, GPIO9 | GPIO10);
