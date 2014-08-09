@@ -28,6 +28,25 @@ int buttons_init(void)
   return 0;
 }
 
+static void on_line_recv(const char* c, unsigned int length)
+{
+  if (c[0] == 'm') {
+    charge_start(MANUAL);
+    usart_print("manual\n");
+  } else if (c[0] == 't') {
+    charge_start(TRICKLE);
+    usart_print("trickle\n");
+  } else if (c[0] == 'c') {
+    charge_start(CHARGE);
+    usart_print("charge\n");
+  } else if (c[0] == '=') {
+    const char* end = c+length+1;
+    long offset = strtol(&c[1], (char** restrict) &end, 10);
+    set_charge_offset(offset);
+    usart_printf("set offset %d\n", offset);
+  }
+}
+
 int main(void)
 {
 #ifndef DEBUG
@@ -49,6 +68,7 @@ int main(void)
   gpio_mode_setup(GPIOC, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO13 | GPIO14 | GPIO15);
   leds_init();
   leds_set(1);
+  usart_on_line_recv = on_line_recv;
   usart_init();
   usart_print("hello world\n");
 
