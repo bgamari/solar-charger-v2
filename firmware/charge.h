@@ -17,5 +17,4 @@ void charge_init(void);
 void charge_start(enum charge_rate rate);
 void charge_stop(void);
 
-
 void set_charge_offset(uint16_t o);

@@ -32,7 +32,7 @@ const uint32_t n_cells = 6;
 
 // Sensor properties
 const uint32_t n_samples = 10; // number of ADC samples to average over
-const uint32_t ibat_sense_r = 25; // current sense resistor in Siemens
+const uint32_t ibat_sense_r = 50; // current sense resistor in Siemens
 const uint32_t ibat_sense_gain = 200; // gain of current sense amplifier
 const uint32_t vbat_sense_gain = 1000 * (68+22) / 22; // millivolts / volt
 const uint32_t vin_sense_gain = 1000 * (56+10) / 10; // millivolts / volt
