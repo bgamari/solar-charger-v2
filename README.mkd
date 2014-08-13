@@ -4,10 +4,10 @@ This is a hardware design for a solar powered battery charger and USB supply.
 The intended use case looks something like this,
 
     Photovoltaic cell   ----> solar charger ----> USB device
-       > Vbat                      |                 5V
+       Vpv > Vbat                  |              Vusb = 5V
                                    |
                               battery pack
-                                Vbat > 5V
+                                Vbat > Vusb
 
 
 This allows the battery pack to be charged at the optimal rate to follow the
