@@ -1,0 +1,23 @@
+# From first oshpark order
+
+ * ordered on 2014-06-29
+ * gerbers from 6caaae3fd284d9b93c4264362f1e48f63301297a
+
+ * TEMP input should be on PB0, not PB2.
+   Fixed in 84065f3e6fe583425e1061e8b6b5b828e67e1bb9
+ * No polarity markers on connectors. Fixed.
+ * Battery voltage sensing unsafe for MCU. Fixed in
+   c2acc26abe9e01c0a4c665c8f1658810e49b2774
+ * Current sense IC footprint too large
+ * USB regulator divider values not common.
+   Fixed in 84047e8.
+ * Lacks UART. Fixed in 86892a92c3593.
+ * JTAG totally wrong. Fixed in d81ddc8.
+
+# From second oshpark order
+
+ * orderd on 2014-07-24
+ * gerbers from 2618b865a5336043018fd33ceef45528da6de6fb
+
+ * `CHARGE_EN` signal breaks charge regulator.
+   Fix in df80227.
