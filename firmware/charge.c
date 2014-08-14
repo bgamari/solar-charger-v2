@@ -38,7 +38,7 @@ const uint32_t vbat_sense_gain = 1000 * (68+22) / 22; // millivolts / volt
 const uint32_t vin_sense_gain = 1000 * (56+10) / 10; // millivolts / volt
 
 // Charge parameters
-const uint32_t trickle_current = 10; // milliamps
+const uint32_t trickle_current = 10 * 1000; // microamps
 const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge rate in seconds
 const uint32_t iteration_time = 500; // update charge feedback in milliseconds
 const uint32_t power_thresh = 50; // low charge power reset threshold (mW)
