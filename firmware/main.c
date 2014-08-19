@@ -18,6 +18,7 @@
 
 int buttons_init(void)
 {
+  gpio_mode_setup(GPIOH, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, GPIO0 | GPIO1);
   exti_select_source(EXTI1, GPIOH); // Button 1
   exti_select_source(EXTI0, GPIOH); // Button 2
 
