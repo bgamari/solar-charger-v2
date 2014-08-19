@@ -98,4 +98,4 @@ console :
 	picocom /dev/ttyUSB0 -b9600 --imap lfcrlf
 
 log-console :
-	cat /dev/ttyUSB0 | tee console.log
+	cat /dev/ttyUSB0 | tee -a console.log
