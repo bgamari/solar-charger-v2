@@ -184,10 +184,13 @@ static bool charge_feedback(void)
     return true;
 
 #ifndef DISABLE_BATTERY_TEMP
-  if (bat_temp < 372000 - 20000)
-    return true; // sanity check
-  if (bat_temp > 372000 + 60000)
-    return true;
+  LOG("temp=%d\n", bat_temp);
+  if (rate == CHARGE) {
+    if (bat_temp < 372000 - 20000)
+      return true; // sanity check
+    if (bat_temp > 372000 + 60000)
+      return true;
+  }
 #endif
 
   // things are okay, keep charging
