@@ -116,7 +116,10 @@ void button1_pressed(void)
     timeout_add(&timeout, 2000, clear_leds, NULL);
 }
 
-void button2_pressed(void) { }
+void button2_pressed(void)
+{
+  charge_start(CHARGE);
+}
 
 void pvd_isr(void)
 {
