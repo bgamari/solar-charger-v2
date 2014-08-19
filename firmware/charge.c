@@ -49,6 +49,8 @@ const uint32_t power_thresh = 50; // low charge power reset threshold (mW)
 #define TEMP_CH 9
 #define VIN_CH  5
 
+const uint32_t max_charge_reg_i = 1000 * 1000; // maximum charge regulator current (uA)
+
 // Charge algorithm state
 static bool charging = false;
 static enum charge_rate rate = CHARGE;
@@ -151,6 +153,10 @@ static bool charge_feedback(void)
   if (bat_temp > 372000 + 60000)
     return true;
 #endif
+
+  // try to avoid overheating the regulator
+  if (bat_i > max_charge_reg_i)
+    charge_offset += 100;
 
 #if 1
   uint32_t power = bat_i * bat_v / 1000 / 1000; // in milliwatts
