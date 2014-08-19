@@ -22,8 +22,8 @@ int buttons_init(void)
   exti_select_source(EXTI1, GPIOH); // Button 1
   exti_select_source(EXTI0, GPIOH); // Button 2
 
-  exti_enable_request(EXTI0 | EXTI1);
   exti_set_trigger(EXTI0 | EXTI1, EXTI_TRIGGER_FALLING);
+  exti_enable_request(EXTI0 | EXTI1);
   nvic_enable_irq(NVIC_EXTI0_IRQ);
   nvic_enable_irq(NVIC_EXTI1_IRQ);
   return 0;
