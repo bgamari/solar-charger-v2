@@ -143,17 +143,6 @@ static void charge_update(void)
 // returns whether to terminate the charging process
 static bool charge_feedback(void)
 {
-  // check battery voltage termination condition
-  if (bat_v > cell_v * n_cells)
-    return true;
-
-#ifndef DISABLE_BATTERY_TEMP
-  if (bat_temp < 372000 - 20000)
-    return true; // sanity check
-  if (bat_temp > 372000 + 60000)
-    return true;
-#endif
-
   // try to avoid overheating the regulator
   if (bat_i > max_charge_reg_i)
     charge_offset += 100;
@@ -189,6 +178,19 @@ static bool charge_feedback(void)
   charge_offset = (charge_offset + 100) % 0x0fff;
 #endif
   update_charge_offset();
+
+  // check battery voltage termination condition
+  if (bat_v > cell_v * n_cells)
+    return true;
+
+#ifndef DISABLE_BATTERY_TEMP
+  if (bat_temp < 372000 - 20000)
+    return true; // sanity check
+  if (bat_temp > 372000 + 60000)
+    return true;
+#endif
+
+  // things are okay, keep charging
   return false;
 }
 
