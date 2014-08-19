@@ -43,6 +43,10 @@ const uint32_t charge_retry_time = 60 * 60 * 6; // how often to try full charge 
 const uint32_t iteration_time = 500; // update charge feedback in milliseconds
 const uint32_t power_thresh = 50; // low charge power reset threshold (mW)
 
+// MPPT parameters
+enum mppt_method mppt_method = MPPT_PO;
+const uint32_t target_pv_v = 13500; // FOCV voltage setpoint (millivolts)
+
 // ADC channel assignments
 #define IBAT_CH 0
 #define VBAT_CH 1
@@ -151,6 +155,8 @@ static bool charge_feedback(void)
   uint32_t power = bat_i * bat_v / 1000 / 1000; // in milliwatts
   LOG("power=%d mW\n", power);
   if (rate == MANUAL) {
+    // Do nothing
+    
   } else if (rate == CHARGE && power < power_thresh) {
     // The output voltage is too low so we aren't charging.
     // Reset charge voltage offset to current battery voltage
@@ -158,13 +164,23 @@ static bool charge_feedback(void)
     LOG("reset offset to %d\n", charge_offset);
     if (perturbation > 0)
       perturbation = -perturbation;
-  } else if (rate == CHARGE) {
+
+  } else if (rate == CHARGE && mppt_method == MPPT_PO) {
     // Perturb and observe maximum power-point tracking
-    LOG("mode=charge %d\n", perturbation);
+    LOG("mode=po %d\n", perturbation);
     if (power < last_power)
       perturbation *= -1;
     charge_offset += perturbation;
     last_power = power;
+
+  } else if (rate == CHARGE && mppt_method == MPPT_FOCV) {
+    // fractional open-circuit voltage MPPT
+    if (input_v > target_pv_v) {
+      charge_offset -= 2;
+    } else {
+      charge_offset += 2;
+    }
+    LOG("mode=focv %d\n", target_pv_v);
 
   } else if (rate == TRICKLE) {
     LOG("mode=trickle setpoint=%d\n", trickle_current);

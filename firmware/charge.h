@@ -1,9 +1,14 @@
 #pragma once
 
 enum charge_rate {
-  TRICKLE, // trickle charge
-  CHARGE,  // maximum power-point tracking
-  MANUAL,  // manual charge point control
+  TRICKLE,     // trickle charge
+  CHARGE,      // charge with maximum power-point traccking
+  MANUAL,      // manual charge point control
+};
+
+enum mppt_method {
+  MPPT_PO,   // perturb-and-observe maximum power-point tracking (MPPT)
+  MPPT_FOCV, // fractional open-circuit voltage (FOCV) MPPT
 };
 
 // Cached sensor values (read-only)
