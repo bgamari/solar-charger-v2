@@ -45,7 +45,7 @@ const uint32_t power_thresh = 50; // low charge power reset threshold (mW)
 
 // MPPT parameters
 enum mppt_method mppt_method = MPPT_FOCV;
-const uint32_t target_pv_v = 13500; // FOCV voltage setpoint (millivolts)
+uint32_t target_pv_v = 16500; // FOCV voltage setpoint (millivolts)
 
 // ADC channel assignments
 #define IBAT_CH 0
