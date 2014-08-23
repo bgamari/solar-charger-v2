@@ -1031,8 +1031,8 @@ Element["onsolder" "PTS-810" "RESET" "unknown" 53.5510mm 28.5780mm -2.9620mm 3.5
 
 Element["found,onsolder" "0603" "LED3" "unknown" 2235.00mil 19.9270mm -105.00mil 4.3890mm 0 77 "auto"]
 (
-	Pad[0.7500mm 0.0500mm 0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
-	Pad[-0.7500mm 0.0500mm -0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
+	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
+	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
 	ElementLine [-1.2524mm 0.5524mm 1.2524mm 0.5524mm 6.00mil]
 	ElementLine [1.2524mm 0.5524mm 1.2524mm -0.5524mm 6.00mil]
 	ElementLine [-1.2524mm -0.5524mm 1.2524mm -0.5524mm 6.00mil]
@@ -1042,8 +1042,8 @@ Element["found,onsolder" "0603" "LED3" "unknown" 2235.00mil 19.9270mm -105.00mil
 
 Element["found,onsolder" "0603" "R14" "unknown" 59.3210mm 685.00mil 60.00mil 0.4760mm 0 77 "auto"]
 (
-	Pad[-0.7500mm 0.0500mm -0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
-	Pad[0.7500mm 0.0500mm 0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
+	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
+	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
 	ElementLine [1.2524mm -0.5524mm -1.2524mm -0.5524mm 6.00mil]
 	ElementLine [-1.2524mm -0.5524mm -1.2524mm 0.5524mm 6.00mil]
 	ElementLine [-1.2524mm 0.5524mm 1.2524mm 0.5524mm 6.00mil]
@@ -1053,8 +1053,8 @@ Element["found,onsolder" "0603" "R14" "unknown" 59.3210mm 685.00mil 60.00mil 0.4
 
 Element["found,onsolder" "0603" "R15" "unknown" 2335.00mil 735.00mil 60.00mil 0.4760mm 0 77 "auto"]
 (
-	Pad[-0.7500mm 0.0500mm -0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
-	Pad[0.7500mm 0.0500mm 0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
+	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
+	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
 	ElementLine [1.2524mm -0.5524mm -1.2524mm -0.5524mm 6.00mil]
 	ElementLine [-1.2524mm -0.5524mm -1.2524mm 0.5524mm 6.00mil]
 	ElementLine [-1.2524mm 0.5524mm 1.2524mm 0.5524mm 6.00mil]
@@ -1064,8 +1064,8 @@ Element["found,onsolder" "0603" "R15" "unknown" 2335.00mil 735.00mil 60.00mil 0.
 
 Element["found,onsolder" "0603" "R16" "unknown" 2335.00mil 785.00mil 60.00mil 0.4760mm 0 77 "auto"]
 (
-	Pad[-0.7500mm 0.0500mm -0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
-	Pad[0.7500mm 0.0500mm 0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
+	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
+	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
 	ElementLine [1.2524mm -0.5524mm -1.2524mm -0.5524mm 6.00mil]
 	ElementLine [-1.2524mm -0.5524mm -1.2524mm 0.5524mm 6.00mil]
 	ElementLine [-1.2524mm 0.5524mm 1.2524mm 0.5524mm 6.00mil]
@@ -1209,7 +1209,7 @@ Element["found" "SDR0604" "L1" "220u" 2750.00mil 1800.00mil 130.00mil 1.5560mm 0
 
 	)
 
-Element["found,onsolder" "0603" "C19" "1u" 2770.00mil 970.00mil -115.00mil 0.4760mm 0 100 "auto"]
+Element["found,onsolder" "0603" "C19" "1u" 2770.00mil 970.00mil -115.00mil 0.4760mm 0 100 "selected,auto"]
 (
 	Pad[-0.0500mm 0.7500mm 0.0500mm 0.7500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
 	Pad[-0.0500mm -0.7500mm 0.0500mm -0.7500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
@@ -1306,7 +1306,7 @@ Element["found" "SRN8040" "L2" "3.3H" 1900.00mil 44.7600mm -4.7700mm -5.6120mm 0
 
 	)
 
-Element["onsolder" "0603" "C15" "100n" 2200.00mil 1250.00mil -40.00mil 2.7620mm 0 100 "auto"]
+Element["onsolder" "0603" "C15" "100n" 2200.00mil 1260.00mil -40.00mil 2.7620mm 0 100 "auto"]
 (
 	Pad[-0.0500mm 0.7500mm 0.0500mm 0.7500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
 	Pad[-0.0500mm -0.7500mm 0.0500mm -0.7500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
@@ -1451,8 +1451,8 @@ Element["" "HEADER2_1" "TEMP" "unknown" 3090.00mil 1580.00mil -30.00mil -60.00mi
 
 Element["onsolder" "0603" "LED1" "unknown" 56.7810mm 685.00mil -2.6910mm 4.4130mm 0 76 "auto"]
 (
-	Pad[0.7500mm 0.0500mm 0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
-	Pad[-0.7500mm 0.0500mm -0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
+	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
+	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
 	ElementLine [-1.2524mm 0.5524mm 1.2524mm 0.5524mm 6.00mil]
 	ElementLine [1.2524mm 0.5524mm 1.2524mm -0.5524mm 6.00mil]
 	ElementLine [-1.2524mm -0.5524mm 1.2524mm -0.5524mm 6.00mil]
@@ -1648,8 +1648,8 @@ Element["onsolder" "PTS-810" "BTN2" "unknown" 1990.00mil 18.2820mm -260.00mil -0
 
 Element["found,onsolder" "0603" "LED2" "unknown" 2235.00mil 735.00mil -105.00mil 4.4130mm 0 77 "auto"]
 (
-	Pad[0.7500mm 0.0500mm 0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
-	Pad[-0.7500mm 0.0500mm -0.7500mm -0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
+	Pad[0.7500mm -0.0500mm 0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "1" "1" "onsolder,square"]
+	Pad[-0.7500mm -0.0500mm -0.7500mm 0.0500mm 0.7000mm 12.00mil 0.8524mm "2" "2" "onsolder,square"]
 	ElementLine [-1.2524mm 0.5524mm 1.2524mm 0.5524mm 6.00mil]
 	ElementLine [1.2524mm 0.5524mm 1.2524mm -0.5524mm 6.00mil]
 	ElementLine [-1.2524mm -0.5524mm 1.2524mm -0.5524mm 6.00mil]
@@ -2061,20 +2061,51 @@ Layer(8 "spare")
 )
 Layer(9 "silk")
 (
-	Text[1750.00mil 1920.00mil 0 188 "Solar" "clearline,onsolder"]
-	Text[1750.00mil 1810.00mil 0 166 "Charger" "clearline,onsolder"]
-	Text[1770.00mil 1665.00mil 0 100 "Ben Gamari" "clearline,onsolder"]
-	Text[1770.00mil 1590.00mil 0 100 "<bgamari@smart-cactus.org>" "clearline,onsolder"]
-	Text[2385.00mil 1660.00mil 0 100 "(c) 2014" "clearline,onsolder"]
-	Text[2325.00mil 1775.00mil 0 100 "v4.0" "clearline,onsolder"]
-	Text[2900.00mil 775.00mil 1 100 "TCK" "clearline,onsolder"]
-	Text[2840.00mil 775.00mil 1 99 "TDI" "clearline,onsolder"]
-	Text[2840.00mil 660.00mil 1 99 "TDO" "clearline,onsolder"]
-	Text[2910.00mil 655.00mil 1 77 "TRST" "clearline,onsolder"]
+	Line[2370.00mil 1190.00mil 2370.00mil 1210.00mil 10.00mil 20.00mil "clearline"]
+	Line[2390.00mil 1220.00mil 2390.00mil 1180.00mil 10.00mil 20.00mil "clearline"]
+	Line[2410.00mil 1170.00mil 2410.00mil 1230.00mil 10.00mil 20.00mil "clearline"]
+	Line[2440.00mil 1200.00mil 2410.00mil 1200.00mil 10.00mil 20.00mil "clearline"]
+	Line[2310.00mil 1590.00mil 2310.00mil 1610.00mil 10.00mil 20.00mil "clearline"]
+	Line[2290.00mil 1580.00mil 2290.00mil 1620.00mil 10.00mil 20.00mil "clearline"]
+	Line[2270.00mil 1570.00mil 2270.00mil 1630.00mil 10.00mil 20.00mil "clearline"]
+	Line[2240.00mil 1600.00mil 2270.00mil 1600.00mil 10.00mil 20.00mil "clearline"]
+	Line[2215.00mil 1870.00mil 2235.00mil 1870.00mil 10.00mil 20.00mil "clearline"]
+	Line[2205.00mil 1850.00mil 2245.00mil 1850.00mil 10.00mil 20.00mil "clearline"]
+	Line[2195.00mil 1830.00mil 2255.00mil 1830.00mil 10.00mil 20.00mil "clearline"]
+	Line[2225.00mil 1800.00mil 2225.00mil 1830.00mil 10.00mil 20.00mil "clearline"]
+	Line[3080.00mil 1800.00mil 3100.00mil 1800.00mil 10.00mil 20.00mil "clearline"]
+	Line[3070.00mil 1780.00mil 3110.00mil 1780.00mil 10.00mil 20.00mil "clearline"]
+	Line[3060.00mil 1760.00mil 3120.00mil 1760.00mil 10.00mil 20.00mil "clearline"]
+	Line[3090.00mil 1730.00mil 3090.00mil 1760.00mil 10.00mil 20.00mil "clearline"]
+	Line[3065.00mil 915.00mil 2840.00mil 915.00mil 10.00mil 20.00mil "clearline"]
+	Line[2840.00mil 915.00mil 2840.00mil 925.00mil 10.00mil 20.00mil "clearline"]
+	Line[2910.00mil 915.00mil 2910.00mil 925.00mil 10.00mil 20.00mil "clearline"]
+	Line[3095.00mil 815.00mil 2970.00mil 815.00mil 10.00mil 20.00mil "clearline"]
+	Line[2970.00mil 815.00mil 2945.00mil 790.00mil 10.00mil 20.00mil "clearline"]
+	Line[2945.00mil 790.00mil 2840.00mil 790.00mil 10.00mil 20.00mil "clearline"]
+	Line[2840.00mil 790.00mil 2840.00mil 800.00mil 10.00mil 20.00mil "clearline"]
+	Line[2910.00mil 790.00mil 2910.00mil 800.00mil 10.00mil 20.00mil "clearline"]
+	Line[3095.00mil 715.00mil 3005.00mil 715.00mil 10.00mil 20.00mil "clearline"]
+	Line[3005.00mil 715.00mil 2940.00mil 650.00mil 10.00mil 20.00mil "clearline"]
+	Line[2940.00mil 650.00mil 2840.00mil 650.00mil 10.00mil 20.00mil "clearline"]
+	Line[2840.00mil 650.00mil 2840.00mil 660.00mil 10.00mil 20.00mil "clearline"]
+	Line[2910.00mil 650.00mil 2910.00mil 660.00mil 10.00mil 20.00mil "clearline"]
+	Line[2995.00mil 1015.00mil 2995.00mil 1070.00mil 10.00mil 20.00mil "clearline"]
+	Line[3095.00mil 1015.00mil 3095.00mil 1070.00mil 10.00mil 20.00mil "clearline"]
+	Text[2300.00mil 1455.00mil 0 100 "Ben Gamari" "clearline,onsolder"]
+	Text[2300.00mil 1390.00mil 0 100 "<bgamari@smart-cactus.org>" "clearline,onsolder"]
 	Text[2965.00mil 1080.00mil 1 99 "TXD" "clearline,onsolder"]
 	Text[3065.00mil 1080.00mil 1 100 "RXD" "clearline,onsolder"]
-	Text[2840.00mil 895.00mil 1 99 "GND" "clearline,onsolder"]
-	Text[2900.00mil 895.00mil 1 98 "TMS" "clearline,onsolder"]
+	Text[2565.00mil 1945.00mil 0 188 "Solar" "clearline,onsolder"]
+	Text[2565.00mil 1835.00mil 0 166 "Charger" "clearline,onsolder"]
+	Text[2910.00mil 1900.00mil 0 100 "v4.0" "clearline,onsolder"]
+	Text[2305.00mil 1320.00mil 0 100 "(c) 2014" "clearline,onsolder"]
+	Text[2810.00mil 940.00mil 1 98 "GND" "clearline,onsolder"]
+	Text[2880.00mil 940.00mil 1 100 "DIO" "clearline,onsolder"]
+	Text[2880.00mil 815.00mil 1 100 "CLK" "clearline,onsolder"]
+	Text[2810.00mil 810.00mil 1 100 "3V3" "clearline,onsolder"]
+	Text[2880.00mil 670.00mil 1 100 "SDA" "clearline,onsolder"]
+	Text[2810.00mil 670.00mil 1 100 "SCL" "clearline,onsolder"]
 )
 Layer(10 "silk")
 (
@@ -2097,11 +2128,11 @@ Layer(10 "silk")
 	Text[2835.00mil 955.00mil 1 77 "GND" "clearline"]
 	Text[2835.00mil 1050.00mil 1 77 "TXD" "clearline"]
 	Text[2890.00mil 1050.00mil 1 77 "RXD" "clearline"]
-	Text[2890.00mil 940.00mil 1 77 "DIO" "clearline"]
 	Text[2890.00mil 850.00mil 1 77 "CLK" "clearline"]
 	Text[2835.00mil 845.00mil 1 76 "3V3" "clearline"]
-	Text[2890.00mil 760.00mil 1 77 "SDA" "clearline"]
-	Text[2835.00mil 755.00mil 1 77 "SCL" "clearline"]
+	Text[2835.00mil 750.00mil 1 77 "SCL" "clearline"]
+	Text[2890.00mil 750.00mil 1 77 "SDA" "clearline"]
+	Text[2890.00mil 940.00mil 1 77 "DIO" "clearline"]
 )
 NetList()
 (
