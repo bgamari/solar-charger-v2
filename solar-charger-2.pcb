@@ -2098,7 +2098,7 @@ Layer(9 "silk")
 	Text[3065.00mil 1080.00mil 1 100 "RXD" "clearline,onsolder"]
 	Text[2565.00mil 1945.00mil 0 188 "Solar" "clearline,onsolder"]
 	Text[2565.00mil 1835.00mil 0 166 "Charger" "clearline,onsolder"]
-	Text[2910.00mil 1900.00mil 0 100 "v4.0" "clearline,onsolder"]
+	Text[2910.00mil 1900.00mil 0 100 "v4.1" "clearline,onsolder"]
 	Text[2305.00mil 1320.00mil 0 100 "(c) 2014" "clearline,onsolder"]
 	Text[2810.00mil 940.00mil 1 98 "GND" "clearline,onsolder"]
 	Text[2880.00mil 940.00mil 1 100 "DIO" "clearline,onsolder"]
