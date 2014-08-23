@@ -44,7 +44,7 @@ const uint32_t iteration_time = 500; // update charge feedback in milliseconds
 const uint32_t power_thresh = 50; // low charge power reset threshold (mW)
 
 // MPPT parameters
-enum mppt_method mppt_method = MPPT_PO;
+enum mppt_method mppt_method = MPPT_FOCV;
 const uint32_t target_pv_v = 13500; // FOCV voltage setpoint (millivolts)
 
 // ADC channel assignments
