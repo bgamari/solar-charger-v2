@@ -17,6 +17,10 @@ extern uint32_t bat_v; // battery voltage (mV)
 extern uint32_t bat_temp; // battery temperature (centi-Kelvin)
 extern uint32_t input_v; // charger input voltage (mV)
 
+// MPPT parameters
+extern enum mppt_method mppt_method;
+extern uint32_t target_pv_v; // FOCV voltage setpoint (millivolts)
+
 void charge_init(void);
 
 void charge_start(enum charge_rate rate);
