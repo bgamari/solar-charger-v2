@@ -104,7 +104,7 @@ refdes=L2
 T 62800 30800 5 10 0 0 0 0 1
 symversion=0.1
 T 62800 30000 5 10 1 1 0 0 1
-value=3.3H
+value=3.3uH
 T 63000 30200 5 10 0 1 0 0 1
 description=Bourns SRN8040-3R3Y
 T 62600 30100 5 10 0 0 0 0 1
