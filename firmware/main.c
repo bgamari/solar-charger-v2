@@ -50,6 +50,8 @@ static void on_line_recv(const char* c, unsigned int length)
     long target = strtol(&c[1], (char** restrict) &end, 10);
     target_pv_v = target;
     usart_printf("target pv %d\n", target);
+  } else if (c[0] == 'l') {
+    logging_enabled = c[1] == '1';
   }
 }
 

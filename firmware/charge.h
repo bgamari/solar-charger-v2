@@ -21,6 +21,8 @@ extern uint32_t input_v; // charger input voltage (mV)
 extern enum mppt_method mppt_method;
 extern uint32_t target_pv_v; // FOCV voltage setpoint (millivolts)
 
+extern bool logging_enabled;
+
 void charge_init(void);
 
 void charge_start(enum charge_rate rate);

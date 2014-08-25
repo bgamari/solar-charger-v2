@@ -20,11 +20,10 @@
 // enable debug output to serial console
 #define DEBUG
 
-#ifdef DEBUG
-#define LOG(fmt, ...) usart_printf(fmt, __VA_ARGS__)
-#else
-#define LOG(fmt, ...)
-#endif
+bool logging_enabled = false;
+
+#define LOG(...) \
+  if (logging_enabled) usart_printf(__VA_ARGS__)
 
 // Battery properties
 const uint32_t cell_v = 1400; // charged cell voltage in millivolts
@@ -222,7 +221,7 @@ static void retry_charge(void *unused)
 static void charge_iteration(void *unused)
 {
   NOT_USED(unused);
-  usart_print("iterate\n");
+  LOG("iterate\n");
   charge_update();
   if (charge_feedback()) {
     charge_start(TRICKLE);
@@ -242,7 +241,7 @@ void charge_start(enum charge_rate new_rate)
 
   if (!charging) {
     charging = true;
-    usart_print("charge start\n");
+    LOG("charge start\n");
 
     rcc_periph_clock_enable(RCC_DAC);
     rcc_osc_on(HSI);
@@ -262,7 +261,7 @@ void charge_stop(void)
 {
   if (!charging)
     return;
-  usart_print("charge stop\n");
+  LOG("charge stop\n");
   charging = false;
   clear_charge_en();
   delay_ms(1); // let things stabilize
