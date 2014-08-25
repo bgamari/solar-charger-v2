@@ -45,6 +45,11 @@ static void on_line_recv(const char* c, unsigned int length)
     long offset = strtol(&c[1], (char** restrict) &end, 10);
     set_charge_offset(offset);
     usart_printf("set offset %d\n", offset);
+  } else if (c[0] == 'v') {
+    const char* end = c+length+1;
+    long target = strtol(&c[1], (char** restrict) &end, 10);
+    target_pv_v = target;
+    usart_printf("target pv %d\n", target);
   }
 }
 
