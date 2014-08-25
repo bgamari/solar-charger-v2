@@ -76,8 +76,6 @@ int main(void)
   charge_init();
   leds_set(2);
 
-  charge_start(CHARGE);
-
   for (int i=2; i < 8; i++) {
     leds_set(i);
     delay_ms(40);
@@ -85,13 +83,15 @@ int main(void)
 
   buttons_init();
   leds_set(0);
+  debug = gpio_get(GPIOH, GPIO0);
+
+  charge_start(CHARGE);
 
   while (1) {
-#ifdef DEBUG
-    delay_ms(40);
-#else
-    __asm__("wfi");
-#endif
+    if (debug)
+      delay_ms(40);
+    else
+      __asm__("wfi");
     timeout_poll();
   }
 }

@@ -1,13 +1,14 @@
 #pragma once
 
-#define DEBUG
+#include <stdbool.h>
 
-#ifdef DEBUG
+extern bool debug;
+
 #define WAIT_FOR(cond) \
-  while (!(cond));
-#else
-#define WAIT_FOR(cond) \
-  while (!(cond)) __asm__("wfi");
-#endif
+  if (debug) {         \
+    while (!(cond));   \
+  } else {             \
+    while (!(cond)) __asm__("wfi"); \
+  }
 
 #define NOT_USED(x) ( (void)(x) )
