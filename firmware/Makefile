@@ -98,4 +98,4 @@ console :
 	picocom /dev/ttyUSB0 -b9600 --imap lfcrlf
 
 log-console :
-	cat /dev/ttyUSB0 | tee -a console.log
+	./log.py -d /dev/ttyUSB0 -a -b 9600 -o console.log
