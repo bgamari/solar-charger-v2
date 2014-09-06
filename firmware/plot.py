@@ -31,12 +31,14 @@ for l in open(sys.argv[1]):
         #print l
         pass
 
+tz = timezone('US/Eastern')
 for i,k in enumerate(data):
     data[k] = np.array(data[k])
     label = signal_labels.get(k, k)
     pl.subplot(len(data), 1, i)
     t = mdate.epoch2num(data[k][:,0])
     xfmt = mdate.DateFormatter('%d-%m-%y %H:%M:%S')
+    xfmt.set_tzinfo(tz)
     pl.plot(t, data[k][:,1], '+', label=label)
     pl.gca().xaxis.set_major_formatter(xfmt)
     pl.gcf().autofmt_xdate()
